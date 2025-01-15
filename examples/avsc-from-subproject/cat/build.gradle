@@ -1,7 +1,7 @@
 import java.util.zip.ZipFile
 
 plugins {
-    id "com.github.davidmc24.gradle.plugin.avro" version "1.2.1"
+    id "com.bakdata.gradle.avro" version "1.10.0"
 }
 
 repositories {
@@ -11,7 +11,7 @@ configurations {
     additionalSchema
 }
 dependencies {
-    implementation "org.apache.avro:avro:1.10.1"
+    implementation "org.apache.avro:avro:1.12.0"
     additionalSchema project(":schema")
 }
 

@@ -20,7 +20,7 @@ plugins {
 // Thus, for now, no coverage reporting, as I place a higher value on testing configuration cache
 // support.
 
-group = "com.github.davidmc24.gradle.plugin"
+group = "com.bakdata.gradle"
 version = "1.9.2-SNAPSHOT"
 
 def isCI = System.getenv("CI") == "true"
@@ -146,13 +146,13 @@ signing {
 gradlePlugin {
     plugins {
         avro {
-            id = "com.github.davidmc24.gradle.plugin.avro"
+            id = "com.bakdata.gradle.avro"
             implementationClass = "com.github.davidmc24.gradle.plugin.avro.AvroPlugin"
             displayName = "avro"
             description = "Conventions plugin for gradle-avro-plugin"
         }
         avroBase {
-            id = "com.github.davidmc24.gradle.plugin.avro-base"
+            id = "com.bakdata.gradle.avro-base"
             implementationClass = "com.github.davidmc24.gradle.plugin.avro.AvroBasePlugin"
             displayName = "avro-base"
             description = "Capabilities plugin for gradle-avro-plugin"

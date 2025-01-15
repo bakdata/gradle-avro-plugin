@@ -60,7 +60,7 @@ pluginManagement {
 `build.gradle`:
 ```groovy
 plugins {
-    id "com.github.davidmc24.gradle.plugin.avro" version "VERSION"
+    id "com.bakdata.gradle.avro" version "VERSION"
 }
 ```
 
@@ -290,7 +290,7 @@ If you do it in the other order, IntelliJ may not properly exclude some director
 # Alternate Usage
 
 If the defaults used by the plugin don't work for you, you can still use the tasks by themselves.
-In this case, use the `com.github.davidmc24.gradle.plugin.avro-base` plugin instead, and create tasks of type `GenerateAvroJavaTask` and/or `GenerateAvroProtocolTask`.
+In this case, use the `com.bakdata.gradle.avro-base` plugin instead, and create tasks of type `GenerateAvroJavaTask` and/or `GenerateAvroProtocolTask`.
 
 Here's a short example of what this might look like:
 
@@ -298,7 +298,7 @@ Here's a short example of what this might look like:
 import com.github.davidmc24.gradle.plugin.avro.GenerateAvroJavaTask
 
 apply plugin: "java"
-apply plugin: "com.github.davidmc24.gradle.plugin.avro-base"
+apply plugin: "com.bakdata.gradle.avro-base"
 
 dependencies {
     implementation "org.apache.avro:avro:1.11.0"
@@ -390,8 +390,8 @@ In `gradle.build.kts` add:
 
 ```kotlin
 plugins {
-    // Find latest release here: https://github.com/davidmc24/gradle-avro-plugin/releases
-    id("com.github.davidmc24.gradle.plugin.avro") version "VERSION"
+    // Find latest release here: https://github.com/bakdata/gradle-avro-plugin/releases
+    id("com.bakdata.gradle.avro") version "VERSION"
 }
 ```
 
@@ -431,7 +431,7 @@ Example build:
 ```groovy
 import com.github.davidmc24.gradle.plugin.avro.ResolveAvroDependenciesTask
 
-apply plugin: "com.github.davidmc24.gradle.plugin.avro-base"
+apply plugin: "com.bakdata.gradle.avro-base"
 
 tasks.register("resolveAvroDependencies", ResolveAvroDependenciesTask) {
     source file("src/avro/normalized")
@@ -452,7 +452,7 @@ Example using base plugin with support for both IDL and JSON protocol files in `
 import com.github.davidmc24.gradle.plugin.avro.GenerateAvroProtocolTask
 import com.github.davidmc24.gradle.plugin.avro.GenerateAvroSchemaTask
 
-apply plugin: "com.github.davidmc24.gradle.plugin.avro-base"
+apply plugin: "com.bakdata.gradle.avro-base"
 
 def generateProtocol = tasks.register("generateProtocol", GenerateAvroProtocolTask) {
     source file("src/main/avro")

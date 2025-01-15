@@ -41,7 +41,7 @@ class CustomConversionFunctionalSpec extends FunctionalSpec {
         |        classpath files(${readPluginClasspath()})
         |    }
         |}
-        |apply plugin: "com.github.davidmc24.gradle.plugin.avro"
+        |apply plugin: "com.bakdata.gradle.avro"
         |import com.github.davidmc24.gradle.plugin.avro.test.custom.*
         |avro {
         |    stringType = "String"
@@ -87,7 +87,7 @@ class CustomConversionFunctionalSpec extends FunctionalSpec {
         |        classpath files(${readPluginClasspath()})
         |    }
         |}
-        |apply plugin: "com.github.davidmc24.gradle.plugin.avro"
+        |apply plugin: "com.bakdata.gradle.avro"
         |import com.github.davidmc24.gradle.plugin.avro.test.custom.*
         |avro {
         |    stringType = "CharSequence"
@@ -133,7 +133,7 @@ class CustomConversionFunctionalSpec extends FunctionalSpec {
         |        classpath files(${readPluginClasspath()})
         |    }
         |}
-        |apply plugin: "com.github.davidmc24.gradle.plugin.avro"
+        |apply plugin: "com.bakdata.gradle.avro"
         |import com.github.davidmc24.gradle.plugin.avro.test.custom.*
         |avro {
         |    stringType = "CharSequence"
