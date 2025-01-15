@@ -3,6 +3,7 @@ package com.github.davidmc24.gradle.plugin.avro;
 import java.io.File;
 import java.io.IOException;
 import java.util.Set;
+import org.apache.avro.JsonSchemaFormatter;
 import org.apache.avro.Schema;
 import org.gradle.api.GradleException;
 import org.gradle.api.file.FileCollection;
@@ -43,7 +44,7 @@ public class ResolveAvroDependenciesTask extends OutputDirTask {
         for (Schema schema : processingState.getSchemas()) {
             try {
                 File outputFile = new File(getOutputDir().get().getAsFile(), AvroUtils.assemblePath(schema));
-                String schemaJson = schema.toString(true);
+                String schemaJson = new JsonSchemaFormatter(true).format(schema);
                 FileUtils.writeJsonFile(outputFile, schemaJson);
                 getLogger().debug("Wrote {}", outputFile.getPath());
             } catch (IOException ex) {

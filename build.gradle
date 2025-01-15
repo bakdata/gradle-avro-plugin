@@ -34,7 +34,7 @@ repositories {
     }
 }
 
-def compileAvroVersion = "1.11.3"
+def avroVersion = "1.12.0"
 
 // Write the plugin's classpath to a file to share with the tests
 task createClasspathManifest {
@@ -51,7 +51,8 @@ task createClasspathManifest {
 
 dependencies {
     implementation localGroovy()
-    implementation "org.apache.avro:avro-compiler:${compileAvroVersion}"
+    implementation "org.apache.avro:avro-compiler:${avroVersion}"
+    implementation "org.apache.avro:avro-idl:${avroVersion}"
     constraints {
         implementation ('com.fasterxml.jackson.core:jackson-databind:2.12.7.1') {
             because 'previous versions have vulnerabilities: CVE-2022-42004, CVE-2022-42003'
@@ -220,7 +221,7 @@ if (JavaVersion.current().java10Compatible) {
 test {
     useJUnitPlatform()
     systemProperties = [
-        avroVersion: compileAvroVersion,
+        avroVersion: avroVersion,
         gradleVersion: gradle.gradleVersion,
     ]
 //    finalizedBy jacocoTestReport // report is always generated after tests run

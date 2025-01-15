@@ -49,7 +49,7 @@ class SchemaResolver {
         Map<String, Schema> parserTypes = processingState.determineParserTypes(fileState);
         try {
             Schema.Parser parser = new Schema.Parser();
-            parser.addTypes(parserTypes);
+            parser.addTypes(parserTypes.values());
             parser.parse(sourceFile);
             Map<String, Schema> typesDefinedInFile = MapUtils.asymmetricDifference(parser.getTypes(), parserTypes);
             processingState.processTypeDefinitions(fileState, typesDefinedInFile);
