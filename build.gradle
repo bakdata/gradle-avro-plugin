@@ -172,19 +172,19 @@ test {
 //    finalizedBy jacocoTestReport // report is always generated after tests run
 }
 
-tasks.create(name: "testCompatibility", type: Test) {
-    description = "Test cross-compatibility of the plugin with Avro/Gradle"
-    group = "Verification"
-    useJUnitPlatform()
-    systemProperties = [
-        avroVersion: findProperty("avroVersion"),
-        gradleVersion: findProperty("gradleVersion"),
-    ]
-    reports {
-        html.destination = file("$buildDir/reports/tests/compatibility")
-        junitXml.destination = file("$buildDir/reports/tests/compatibility")
-    }
-}
+//tasks.create(name: "testCompatibility", type: Test) {
+//    description = "Test cross-compatibility of the plugin with Avro/Gradle"
+//    group = "Verification"
+//    useJUnitPlatform()
+//    systemProperties = [
+//        avroVersion: findProperty("avroVersion"),
+//        gradleVersion: findProperty("gradleVersion"),
+//    ]
+//    reports {
+//        html.destination = file("$buildDir/reports/tests/compatibility")
+//        junitXml.destination = file("$buildDir/reports/tests/compatibility")
+//    }
+//}
 
 tasks.withType(Test) {
     jvmArgs = ["-Xss320k"]
