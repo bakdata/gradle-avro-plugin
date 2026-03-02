@@ -4,5 +4,5 @@ repositories {
 
 dependencies {
     implementation 'com.bakdata.gradle.davidmc24:gradle-avro-plugin:1.10.0'
-    implementation 'org.apache.avro:avro:1.11.3'
+    implementation 'org.apache.avro:avro:1.11.0'
 }
