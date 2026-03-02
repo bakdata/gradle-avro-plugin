@@ -1,8 +1,8 @@
 # Contributing
 
-> Before contributing, please read our [code of conduct](https://github.com/davidmc24/gradle-avro-plugin/blob/master/CODE_OF_CONDUCT.md).
+> Before contributing, please read our [code of conduct](https://github.com/bakdata/gradle-avro-plugin/blob/master/CODE_OF_CONDUCT.md).
 
-Before starting work on an enhancement, it's highly recommended to open an [issue](https://github.com/davidmc24/gradle-avro-plugin/issues) to describe the intended change.
+Before starting work on an enhancement, it's highly recommended to open an [issue](https://github.com/bakdata/gradle-avro-plugin/issues) to describe the intended change.
 This allows for the project maintainers to provide feedback before you've done work that may not fit the project's vision.
 
 Note that this plugin is primarily focussed on exposing functionality from the [Apache Avro Java API](https://avro.apache.org/docs/current/api/java/index.html) in the ways most commonly used in Gradle builds.

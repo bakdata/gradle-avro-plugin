@@ -3,27 +3,17 @@ plugins {
     id "checkstyle"
     id "codenarc"
     id "idea"
-//    id "jacoco"
-    id "maven-publish"
-    id "signing"
+    id "com.bakdata.release" version "2.1.0"
+    id "com.bakdata.sonar" version "2.1.0"
+    id "com.bakdata.sonatype" version "2.1.0"
     id "java-gradle-plugin"
-    id "org.nosphere.gradle.github.actions" version "1.2.0"
-    id "io.github.gradle-nexus.publish-plugin" version "1.0.0"
-//    id "pl.droidsonroids.jacoco.testkit" version "1.0.8"
+    id "com.gradle.plugin-publish" version "2.0.0"
 }
 
-// Gradle TestKit (which most of this plugins tests run using) runs the builds in a separate
-// JVM than the tests.  Thus, for Jacoco to pick up on it, you need to do some extra legwork.
-// https://github.com/koral--/jacoco-gradle-testkit-plugin seeks to solve that
-// However, Gradle 7.1 doesn't currently support the combination of the configuration cache
-// with a Java agent (such as Jacoco) and TestKit.
-// Thus, for now, no coverage reporting, as I place a higher value on testing configuration cache
-// support.
+description = "A Gradle plugin to allow easily performing Java code generation for Apache Avro. It supports JSON schema declaration files, JSON protocol declaration files, and Avro IDL files."
 
-group = "com.github.davidmc24.gradle.plugin"
+group = "com.bakdata.gradle.davidmc24"
 version = "1.9.2-SNAPSHOT"
-
-def isCI = System.getenv("CI") == "true"
 
 repositories {
     mavenCentral()
@@ -85,11 +75,6 @@ tasks.withType(AbstractArchiveTask) {
     reproducibleFileOrder = true
 }
 
-java {
-    withJavadocJar()
-    withSourcesJar()
-}
-
 javadoc {
     if(JavaVersion.current().isJava9Compatible()) {
         options.addBooleanOption('html5', true)
@@ -97,62 +82,27 @@ javadoc {
     options.addStringOption('Xdoclint:none', '-quiet')
 }
 
-publishing {
-    publications.withType(MavenPublication) {
-        pom {
-            name = "gradle-avro-plugin"
-            description = "A Gradle plugin to allow easily performing Java code generation for Apache Avro. It supports JSON schema declaration files, JSON protocol declaration files, and Avro IDL files."
-            url = "https://github.com/davidmc24/gradle-avro-plugin"
-            licenses {
-                license {
-                    name = "The Apache License, Version 2.0"
-                    url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
-                }
-            }
-            developers {
-                developer {
-                    id = 'davidmc24'
-                    name = 'David M. Carr'
-                    email = 'david@carrclan.us'
-                }
-            }
-            scm {
-                connection = 'scm:git:https://github.com/davidmc24/gradle-avro-plugin.git'
-                developerConnection = 'scm:git:ssh://github.com/davidmc24/gradle-avro-plugin.git'
-                url = 'https://github.com/davidmc24/gradle-avro-plugin'
-            }
+publication {
+    developers {
+        developer {
+            id = 'davidmc24'
+            name = 'David M. Carr'
+            email = 'david@carrclan.us'
         }
     }
-}
-
-nexusPublishing {
-    repositories {
-        sonatype()
-    }
-}
-
-signing {
-    if (isCI) {
-        def signingKeyId = System.getenv("SIGNING_KEY_ID")
-        def signingKey = System.getenv("SIGNING_KEY")
-        def signingPassword = System.getenv("SIGNING_PASSWORD")
-        useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
-    }
-    publishing.publications.all { publication ->
-        sign publication
-    }
+    createPublication = false
 }
 
 gradlePlugin {
     plugins {
         avro {
-            id = "com.github.davidmc24.gradle.plugin.avro"
+            id = "com.bakdata.gradle.davidmc24.avro"
             implementationClass = "com.github.davidmc24.gradle.plugin.avro.AvroPlugin"
             displayName = "avro"
             description = "Conventions plugin for gradle-avro-plugin"
         }
         avroBase {
-            id = "com.github.davidmc24.gradle.plugin.avro-base"
+            id = "com.bakdata.gradle.davidmc24.avro-base"
             implementationClass = "com.github.davidmc24.gradle.plugin.avro.AvroBasePlugin"
             displayName = "avro-base"
             description = "Capabilities plugin for gradle-avro-plugin"
@@ -207,14 +157,10 @@ codenarc {
 //    toolVersion = "2.2.0"
 }
 
-// Java 8+ is required due to requirements introduced in Avro 1.9.0
-// Java 8+ is also required by Gradle 5.x
-if (JavaVersion.current().java10Compatible) {
-    compileJava {
-        options.release = 8
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
     }
-} else {
-    sourceCompatibility = 8
 }
 
 test {
@@ -239,19 +185,6 @@ tasks.create(name: "testCompatibility", type: Test) {
         junitXml.destination = file("$buildDir/reports/tests/compatibility")
     }
 }
-
-//jacoco {
-//    // 0.8.7+ needed for Java 15 support
-//    // See https://www.jacoco.org/jacoco/trunk/doc/changes.html
-//    toolVersion = "0.8.7-SNAPSHOT"
-//}
-
-//jacocoTestReport {
-//    reports {
-//        html.enabled true
-//        xml.enabled true
-//    }
-//}
 
 tasks.withType(Test) {
     jvmArgs "-Xss320k"
