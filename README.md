@@ -7,7 +7,7 @@ Its code has been donated to the [Apache Avro project](http://avro.apache.org/),
 
 This is a [Gradle](http://www.gradle.org/) plugin to allow easily performing Java code generation for [Apache Avro](http://avro.apache.org/).  It supports JSON schema declaration files, JSON protocol declaration files, and Avro IDL files.
 
-[![Build Status](https://github.com/davidmc24/gradle-avro-plugin/workflows/CI%20Build/badge.svg)](https://github.com/davidmc24/gradle-avro-plugin/actions)
+[![Build Status](https://github.com/bakdata/gradle-avro-plugin/workflows/CI%20Build/badge.svg)](https://github.com/bakdata/gradle-avro-plugin/actions)
 
 # Compatibility
 
@@ -45,7 +45,7 @@ This is a [Gradle](http://www.gradle.org/) plugin to allow easily performing Jav
 
 # Usage
 
-Add the following to your build files.  Substitute the desired version based on [CHANGES.md](https://github.com/davidmc24/gradle-avro-plugin/blob/master/CHANGES.md).
+Add the following to your build files.  Substitute the desired version based on [CHANGES.md](https://github.com/bakdata/gradle-avro-plugin/blob/master/CHANGES.md).
 
 `settings.gradle`:
 ```groovy

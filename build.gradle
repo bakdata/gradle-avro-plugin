@@ -102,7 +102,7 @@ publishing {
         pom {
             name = "gradle-avro-plugin"
             description = "A Gradle plugin to allow easily performing Java code generation for Apache Avro. It supports JSON schema declaration files, JSON protocol declaration files, and Avro IDL files."
-            url = "https://github.com/davidmc24/gradle-avro-plugin"
+            url = "https://github.com/bakdata/gradle-avro-plugin"
             licenses {
                 license {
                     name = "The Apache License, Version 2.0"
@@ -117,9 +117,9 @@ publishing {
                 }
             }
             scm {
-                connection = 'scm:git:https://github.com/davidmc24/gradle-avro-plugin.git'
-                developerConnection = 'scm:git:ssh://github.com/davidmc24/gradle-avro-plugin.git'
-                url = 'https://github.com/davidmc24/gradle-avro-plugin'
+                connection = 'scm:git:https://github.com/bakdata/gradle-avro-plugin.git'
+                developerConnection = 'scm:git:ssh://github.com/bakdata/gradle-avro-plugin.git'
+                url = 'https://github.com/bakdata/gradle-avro-plugin'
             }
         }
     }
