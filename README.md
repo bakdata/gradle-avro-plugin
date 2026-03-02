@@ -171,7 +171,7 @@ avro {
 
 ## fieldVisibility
 
-Valid values: any [FieldVisibility](https://avro.apache.org/docs/1.12.1/api/java/org/apache/avro/compiler/specific/SpecificCompiler.FieldVisibility.html) or equivalent `String` name (matched case-insensitively); default `"PRIVATE"` (default)
+Valid values: any [FieldVisibility](https://avro.apache.org/docs/1.12.0/api/java/org/apache/avro/compiler/specific/SpecificCompiler.FieldVisibility.html) or equivalent `String` name (matched case-insensitively); default `"PRIVATE"` (default)
 
 By default, the fields in generated Java files will have private visibility.
 Set to `"PRIVATE"` to explicitly specify private visibility of the fields, or `"PUBLIC"` to specify public visibility of the fields.
