@@ -254,7 +254,7 @@ tasks.create(name: "testCompatibility", type: Test) {
 //}
 
 tasks.withType(Test) {
-    jvmArgs "-Xss320k"
+    jvmArgs "-Xss640k"
     minHeapSize "120m"
     maxHeapSize "280m"
     maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
