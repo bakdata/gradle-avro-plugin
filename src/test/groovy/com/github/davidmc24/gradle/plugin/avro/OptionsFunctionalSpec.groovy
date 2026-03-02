@@ -284,7 +284,7 @@ class OptionsFunctionalSpec extends FunctionalSpec {
         |        classpath files(["${templatesDir.parentFile.toURI()}"])
         |    }
         |}
-        |apply plugin: "com.github.davidmc24.gradle.plugin.avro"
+        |apply plugin: "com.bakdata.gradle.davidmc24.avro"
         |avro {
         |    templateDirectory = "/alternateTemplates/"
         |    additionalVelocityToolClasses = ['com.github.davidmc24.gradle.plugin.avro.test.custom.TimestampGenerator',
