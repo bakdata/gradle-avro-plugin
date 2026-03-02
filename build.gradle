@@ -34,7 +34,7 @@ repositories {
     }
 }
 
-def avroVersion = "1.12.0"
+def avroVersion = "1.12.1"
 
 // Write the plugin's classpath to a file to share with the tests
 task createClasspathManifest {

@@ -25,8 +25,8 @@ This is a [Gradle](http://www.gradle.org/) plugin to allow easily performing Jav
     * Java 8-12 support requires Gradle 5.1 or higher (versions lower than 5.1 are no longer supported)
 * Currently built against Gradle 7.6
     * Currently tested against Gradle 5.1-5.6.4 and 6.0-7.6
-* Currently built against Avro 1.12.0
-    * Currently tested against Avro 1.11.0-1.12.0
+* Currently built against Avro 1.12.1
+    * Currently tested against Avro 1.11.0-1.12.1
     * Avro 1.9.0-1.10.2 were last supported in version 1.2.1 
 * Support for Kotlin
     * Dropped integration with the Kotlin plugin in plugin version 1.4.0, as Kotlin 1.7.x would require compile-time dependency on a specific Kotlin version
@@ -71,7 +71,7 @@ repositories {
     mavenCentral()
 }
 dependencies {
-    implementation "org.apache.avro:avro:1.12.0"
+    implementation "org.apache.avro:avro:1.12.1"
 }
 ```
 
@@ -171,7 +171,7 @@ avro {
 
 ## fieldVisibility
 
-Valid values: any [FieldVisibility](https://avro.apache.org/docs/1.12.0/api/java/org/apache/avro/compiler/specific/SpecificCompiler.FieldVisibility.html) or equivalent `String` name (matched case-insensitively); default `"PRIVATE"` (default)
+Valid values: any [FieldVisibility](https://avro.apache.org/docs/1.12.1/api/java/org/apache/avro/compiler/specific/SpecificCompiler.FieldVisibility.html) or equivalent `String` name (matched case-insensitively); default `"PRIVATE"` (default)
 
 By default, the fields in generated Java files will have private visibility.
 Set to `"PRIVATE"` to explicitly specify private visibility of the fields, or `"PUBLIC"` to specify public visibility of the fields.
@@ -301,7 +301,7 @@ apply plugin: "java"
 apply plugin: "com.github.davidmc24.gradle.plugin.avro-base"
 
 dependencies {
-    implementation "org.apache.avro:avro:1.12.0"
+    implementation "org.apache.avro:avro:1.12.1"
 }
 
 def generateAvro = tasks.register("generateAvro", GenerateAvroJavaTask) {

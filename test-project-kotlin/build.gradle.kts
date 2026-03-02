@@ -8,7 +8,7 @@ repositories {
     mavenCentral()
 }
 
-project.ext.set("avroVersion", "1.12.0")
+project.ext.set("avroVersion", "1.12.1")
 dependencies {
     implementation("org.apache.avro:avro:${project.ext.get("avroVersion")}")
     implementation("org.apache.avro:avro-tools:${project.ext.get("avroVersion")}")
