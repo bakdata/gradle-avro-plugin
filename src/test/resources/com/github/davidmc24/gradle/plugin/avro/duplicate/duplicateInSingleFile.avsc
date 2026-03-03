@@ -29,9 +29,6 @@
             }, {
                 "name" : "month",
                 "type" : ["null", "int"]
-            }, {
-                "name" : "year",
-                "type" : ["null", "int"]
             } ]
         }
     } ]

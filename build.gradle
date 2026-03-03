@@ -19,8 +19,8 @@ repositories {
     mavenCentral()
     maven {
         // Used for snapshot builds for some libraries
-        name 'Sonatype OSS'
-        url 'https://oss.sonatype.org/content/repositories/snapshots'
+        name = 'Sonatype OSS'
+        url = 'https://oss.sonatype.org/content/repositories/snapshots'
     }
 }
 
