@@ -208,7 +208,6 @@ class SchemaResolverSpec extends Specification {
 
         then:
         def ex = thrown(GradleException)
-        ex.message.contains("* $errorFilePath: \"enum\" is not a defined name. The type of the \"gender\" " +
-                "field must be a defined name or a {\"type\": ...} expression.")
+        ex.message.contains("* $errorFilePath: Undefined schema: example.avro.enum")
     }
 }

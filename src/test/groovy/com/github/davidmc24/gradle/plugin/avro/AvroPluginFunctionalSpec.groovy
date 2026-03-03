@@ -151,8 +151,7 @@ class AvroPluginFunctionalSpec extends FunctionalSpec {
         then:
         result.task(":generateAvroJava").outcome == FAILED
         result.output.contains("> Could not resolve schema definition files:")
-        result.output.contains("* $errorFilePath: \"enum\" is not a defined name. The type of the \"gender\" " +
-                "field must be a defined name or a {\"type\": ...} expression.")
+        result.output.contains("* $errorFilePath: Undefined schema: example.avro.enum")
     }
 
     @SuppressWarnings(["GStringExpressionWithinString"])
