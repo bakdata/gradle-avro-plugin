@@ -39,6 +39,7 @@ import static com.github.davidmc24.gradle.plugin.avro.Constants.IDL_EXTENSION;
 /**
  * Task to convert Avro IDL files into Avro protocol files using {@link Idl}.
  */
+@SuppressWarnings("deprecation") //FIXME use new IdlReader
 @CacheableTask
 public class GenerateAvroProtocolTask extends OutputDirTask {
 
