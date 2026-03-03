@@ -55,12 +55,13 @@ class AvroUtilsSpec extends Specification {
     }
 
     Schema createSchema(String namespace, String name, boolean disableNameValidation = false) {
+        def oldValidator = Schema.VALIDATE_NAMES.get()
         if (disableNameValidation) {
             Schema.VALIDATE_NAMES.set(NameValidator.NO_VALIDATION)
         }
         def schema = Schema.createRecord(name, null, namespace, false, Collections.emptyList())
         if (disableNameValidation) {
-            Schema.VALIDATE_NAMES.set(NameValidator.UTF_VALIDATOR)
+            Schema.VALIDATE_NAMES.set(oldValidator)
         }
         return schema
     }
