@@ -9,4 +9,4 @@
 1. Push
 1. If there was a issue requesting the release, close it.
 1. Close the milestone.
-1. Go to the [GitHub Releases page](https://github.com/davidmc24/gradle-avro-plugin/releases), click "Draft a new release", select the tag version, use the version number as the title, copy the relevant segment from `CHANGES.md` into the description, and click "Publish release".  This will trigger the CI job that does the actual publishing.
+1. Go to the [GitHub Releases page](https://github.com/bakdata/gradle-avro-plugin/releases), click "Draft a new release", select the tag version, use the version number as the title, copy the relevant segment from `CHANGES.md` into the description, and click "Publish release".  This will trigger the CI job that does the actual publishing.
