@@ -21,7 +21,7 @@ This is a [Gradle](http://www.gradle.org/) plugin to allow easily performing Jav
 * Currently built against Gradle 8.14.4
     * Currently tested against Gradle 8.4-8.14.4
 * Currently built against Avro 1.12.1
-    * Currently tested against Avro 1.12.0-1.12.1
+    * Currently tested against Avro 1.12.1
     * Avro 1.11.0-1.11.5 were last supported in version 1.9.1
     * Avro 1.9.0-1.10.2 were last supported in version 1.2.1 
 * Support for Kotlin
