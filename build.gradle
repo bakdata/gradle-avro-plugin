@@ -186,12 +186,10 @@ tasks.register("testCompatibility", Test) {
         html.outputLocation = layout.buildDirectory.dir("reports/tests/compatibility")
         junitXml.outputLocation = layout.buildDirectory.dir("reports/tests/compatibility")
     }
-    //FIXME breaks sonar
-    enabled = false
 }
 
 tasks.withType(Test).configureEach {
-    jvmArgs = ["-Xss320k"]
+    jvmArgs = ["-Xss640k"]
     minHeapSize = "120m"
     maxHeapSize = "280m"
     maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
