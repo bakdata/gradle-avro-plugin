@@ -86,11 +86,6 @@ publication {
     license = 'The Apache License, Version 2.0'
     developers {
         developer {
-            id = 'davidmc24'
-            name = 'David M. Carr'
-            email = 'david@carrclan.us'
-        }
-        developer {
             id = 'philipp94831'
             name = 'Philipp Schirmer'
         }
