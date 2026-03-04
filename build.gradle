@@ -27,14 +27,14 @@ repositories {
 def compileAvroVersion = "1.11.3"
 
 // Write the plugin's classpath to a file to share with the tests
-task.register("createClasspathManifest") {
-    def outputDir = file("$buildDir/$name")
+tasks.register("createClasspathManifest") {
+    def outputDir = layout.buildDirectory.file(name)
 
     inputs.files sourceSets.main.runtimeClasspath
     outputs.dir outputDir
 
     doLast {
-        outputDir.mkdirs()
+        outputDir.get().asFile.mkdirs()
         file("$outputDir/plugin-classpath.txt").text = sourceSets.main.runtimeClasspath.join("\n")
     }
 }
@@ -96,13 +96,13 @@ publication {
 
 gradlePlugin {
     plugins {
-        named("avro") {
+        create("avro") {
             id = "com.bakdata.gradle.davidmc24.avro"
             implementationClass = "com.github.davidmc24.gradle.plugin.avro.AvroPlugin"
             displayName = "avro"
             description = "Conventions plugin for gradle-avro-plugin"
         }
-        named("avroBase") {
+        create("avroBase") {
             id = "com.bakdata.gradle.davidmc24.avro-base"
             implementationClass = "com.github.davidmc24.gradle.plugin.avro.AvroBasePlugin"
             displayName = "avro-base"
