@@ -11,7 +11,7 @@ This is a [Gradle](http://www.gradle.org/) plugin to allow easily performing Jav
 
 # Compatibility
 
-**NOTE**: Pre-1.0 versions used a different publishing process/namespace.  It is strongly recommended to upgrade to a newer version.  Further details can be found in the [change log](CHANGES.md).
+**NOTE**: Pre-1.10 versions used a different publishing process/namespace.  It is strongly recommended to upgrade to a newer version.  Further details can be found in the [change log](CHANGES.md).
 
 * Currently tested against Java 8, 11, and 17-19
     * Though not supported yet, tests are also run against Java 20 to provide early notification of potential incompatibilities.
