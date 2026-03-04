@@ -84,6 +84,7 @@ javadoc {
 }
 
 publication {
+    //TODO update
     developers {
         developer {
             id = 'davidmc24'
