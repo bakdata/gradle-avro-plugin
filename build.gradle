@@ -28,14 +28,15 @@ def compileAvroVersion = "1.11.3"
 
 // Write the plugin's classpath to a file to share with the tests
 tasks.register("createClasspathManifest") {
-    def outputDir = layout.buildDirectory.file(name)
+    def outputDir = layout.buildDirectory.dir(name)
 
     inputs.files sourceSets.main.runtimeClasspath
     outputs.dir outputDir
 
     doLast {
-        outputDir.get().asFile.mkdirs()
-        file("$outputDir/plugin-classpath.txt").text = sourceSets.main.runtimeClasspath.join("\n")
+        def outputFile = outputDir.get().asFile
+        outputFile.mkdirs()
+        file("$outputFile/plugin-classpath.txt").text = sourceSets.main.runtimeClasspath.join("\n")
     }
 }
 
