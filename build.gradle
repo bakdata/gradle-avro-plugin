@@ -27,15 +27,16 @@ repositories {
 def avroVersion = "1.12.1"
 
 // Write the plugin's classpath to a file to share with the tests
-task createClasspathManifest {
-    def outputDir = file("$buildDir/$name")
+tasks.register("createClasspathManifest") {
+    def outputDir = layout.buildDirectory.dir(name)
 
     inputs.files sourceSets.main.runtimeClasspath
     outputs.dir outputDir
 
     doLast {
-        outputDir.mkdirs()
-        file("$outputDir/plugin-classpath.txt").text = sourceSets.main.runtimeClasspath.join("\n")
+        def outputFile = outputDir.get().asFile
+        outputFile.mkdirs()
+        file("$outputFile/plugin-classpath.txt").text = sourceSets.main.runtimeClasspath.join("\n")
     }
 }
 
@@ -64,14 +65,14 @@ dependencies {
     codenarc "org.codehaus.groovy:groovy-all:3.0.9"
 }
 
-tasks.withType(AbstractCompile) {
+tasks.withType(AbstractCompile).configureEach {
     options.encoding = "UTF-8"
 }
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
     options.compilerArgs << "-Xlint:all" << "-Xlint:-options" << "-Werror"
 }
 
-tasks.withType(AbstractArchiveTask) {
+tasks.withType(AbstractArchiveTask).configureEach {
     preserveFileTimestamps = false
     reproducibleFileOrder = true
 }
@@ -92,17 +93,18 @@ publication {
         }
     }
     createPublication = false
+    //TODO license
 }
 
 gradlePlugin {
     plugins {
-        avro {
+        create("avro") {
             id = "com.bakdata.gradle.davidmc24.avro"
             implementationClass = "com.github.davidmc24.gradle.plugin.avro.AvroPlugin"
             displayName = "avro"
             description = "Conventions plugin for gradle-avro-plugin"
         }
-        avroBase {
+        create("avroBase") {
             id = "com.bakdata.gradle.davidmc24.avro-base"
             implementationClass = "com.github.davidmc24.gradle.plugin.avro.AvroBasePlugin"
             displayName = "avro-base"
@@ -173,21 +175,23 @@ test {
 //    finalizedBy jacocoTestReport // report is always generated after tests run
 }
 
-//tasks.create(name: "testCompatibility", type: Test) {
-//    description = "Test cross-compatibility of the plugin with Avro/Gradle"
-//    group = "Verification"
-//    useJUnitPlatform()
-//    systemProperties = [
-//        avroVersion: findProperty("avroVersion"),
-//        gradleVersion: findProperty("gradleVersion"),
-//    ]
-//    reports {
-//        html.destination = file("$buildDir/reports/tests/compatibility")
-//        junitXml.destination = file("$buildDir/reports/tests/compatibility")
-//    }
-//}
+tasks.register("testCompatibility", Test) {
+    description = "Test cross-compatibility of the plugin with Avro/Gradle"
+    group = "Verification"
+    useJUnitPlatform()
+    systemProperties = [
+        avroVersion: findProperty("avroVersion"),
+        gradleVersion: findProperty("gradleVersion"),
+    ]
+    reports {
+        html.outputLocation = layout.buildDirectory.dir("reports/tests/compatibility")
+        junitXml.outputLocation = layout.buildDirectory.dir("reports/tests/compatibility")
+    }
+    //FIXME breaks sonar
+    enabled = false
+}
 
-tasks.withType(Test) {
+tasks.withType(Test).configureEach {
     jvmArgs = ["-Xss320k"]
     minHeapSize = "120m"
     maxHeapSize = "280m"
