@@ -20,7 +20,6 @@ jobs:
       - uses: bakdata/ci-templates/actions/java-gradle-setup@feature/repo-branch
         with:
           java-version: ${{ matrix.java }}
-          gradle-cache: false
       - shell: bash
         run: ./gradlew testCompatibility -PavroVersion=${{ matrix.avro }} -PgradleVersion=${{ matrix.gradle }}
   java18:
@@ -37,7 +36,6 @@ jobs:
         with:
           java-distribution: "zulu"
           java-version: ${{ matrix.java }}
-          gradle-cache: false
       - shell: bash
         run: ./gradlew testCompatibility -PavroVersion=${{ matrix.avro }} -PgradleVersion=${{ matrix.gradle }}
   java-19:
@@ -54,7 +52,6 @@ jobs:
         with:
           java-distribution: "zulu"
           java-version: ${{ matrix.java }}
-          gradle-cache: false
       - shell: bash
         run: ./gradlew testCompatibility -PavroVersion=${{ matrix.avro }} -PgradleVersion=${{ matrix.gradle }}
   java-20:
@@ -71,7 +68,6 @@ jobs:
         with:
           java-distribution: "zulu"
           java-version: ${{ matrix.java }}
-          gradle-cache: false
       - shell: bash
         run: ./gradlew testCompatibility -PavroVersion=${{ matrix.avro }} -PgradleVersion=${{ matrix.gradle }}
   java-21:
@@ -87,7 +83,6 @@ jobs:
       - uses: bakdata/ci-templates/actions/java-gradle-setup@feature/repo-branch
         with:
           java-version: ${{ matrix.java }}
-          gradle-cache: false
       - shell: bash
         run: ./gradlew testCompatibility -PavroVersion=${{ matrix.avro }} -PgradleVersion=${{ matrix.gradle }}
   java-22:
@@ -104,7 +99,6 @@ jobs:
         with:
           java-distribution: "zulu"
           java-version: ${{ matrix.java }}
-          gradle-cache: false
       - shell: bash
         run: ./gradlew testCompatibility -PavroVersion=${{ matrix.avro }} -PgradleVersion=${{ matrix.gradle }}
   java-23:
@@ -121,7 +115,6 @@ jobs:
         with:
           java-distribution: "zulu"
           java-version: ${{ matrix.java }}
-          gradle-cache: false
       - shell: bash
         run: ./gradlew testCompatibility -PavroVersion=${{ matrix.avro }} -PgradleVersion=${{ matrix.gradle }}
   java-24:
@@ -138,6 +131,5 @@ jobs:
         with:
           java-distribution: "zulu"
           java-version: ${{ matrix.java }}
-          gradle-cache: false
       - shell: bash
         run: ./gradlew testCompatibility -PavroVersion=${{ matrix.avro }} -PgradleVersion=${{ matrix.gradle }}
