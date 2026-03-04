@@ -171,7 +171,6 @@ test {
         avroVersion: compileAvroVersion,
         gradleVersion: gradle.gradleVersion,
     ]
-//    finalizedBy jacocoTestReport // report is always generated after tests run
 }
 
 tasks.register("testCompatibility", Test) {
