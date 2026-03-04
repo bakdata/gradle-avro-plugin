@@ -21,7 +21,7 @@ plugins {
 // support.
 
 group = "com.bakdata.gradle.davidmc24"
-version = "1.9.2-SNAPSHOT"
+version = "1.10.0-SNAPSHOT"
 
 def isCI = System.getenv("CI") == "true"
 
@@ -111,9 +111,8 @@ publishing {
             }
             developers {
                 developer {
-                    id = 'davidmc24'
-                    name = 'David M. Carr'
-                    email = 'david@carrclan.us'
+                    id = 'philipp94831'
+                    name = 'Philipp Schirmer'
                 }
             }
             scm {
