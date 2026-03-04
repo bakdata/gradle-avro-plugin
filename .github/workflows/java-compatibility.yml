@@ -16,7 +16,8 @@ jobs:
         gradle: ["7.3", "8.14.4"] # See here for latest versions: https://services.gradle.org/versions/
         java: ["17"]
     steps:
-      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.71.0
+      - uses: actions/checkout@v6
+      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.75.0
         with:
           java-version: ${{ matrix.java }}
       - shell: bash
@@ -30,7 +31,8 @@ jobs:
         gradle: ["7.5", "8.14.4"] # See here for latest versions: https://services.gradle.org/versions/
         java: ["18"]
     steps:
-      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.71.0
+      - uses: actions/checkout@v6
+      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.75.0
         with:
           java-version: ${{ matrix.java }}
       - shell: bash
@@ -44,7 +46,8 @@ jobs:
         gradle: ["7.6", "8.14.4"] # See here for latest versions: https://services.gradle.org/versions/
         java: ["19"]
     steps:
-      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.71.0
+      - uses: actions/checkout@v6
+      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.75.0
         with:
           java-version: ${{ matrix.java }}
       - shell: bash
@@ -58,7 +61,8 @@ jobs:
         gradle: ["8.1", "8.14.4"] # See here for latest versions: https://services.gradle.org/versions/
         java: ["20"]
     steps:
-      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.71.0
+      - uses: actions/checkout@v6
+      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.75.0
         with:
           java-version: ${{ matrix.java }}
       - shell: bash
@@ -72,7 +76,8 @@ jobs:
         gradle: ["8.4", "8.14.4"] # See here for latest versions: https://services.gradle.org/versions/
         java: ["21"]
     steps:
-      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.71.0
+      - uses: actions/checkout@v6
+      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.75.0
         with:
           java-version: ${{ matrix.java }}
       - shell: bash
@@ -86,7 +91,8 @@ jobs:
         gradle: ["8.7", "8.14.4"] # See here for latest versions: https://services.gradle.org/versions/
         java: ["22"]
     steps:
-      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.71.0
+      - uses: actions/checkout@v6
+      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.75.0
         with:
           java-version: ${{ matrix.java }}
       - shell: bash
@@ -100,7 +106,8 @@ jobs:
         gradle: ["8.10", "8.14.4"] # See here for latest versions: https://services.gradle.org/versions/
         java: ["23"]
     steps:
-      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.71.0
+      - uses: actions/checkout@v6
+      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.75.0
         with:
           java-version: ${{ matrix.java }}
       - shell: bash
@@ -114,7 +121,8 @@ jobs:
         gradle: ["8.14", "8.14.4"] # See here for latest versions: https://services.gradle.org/versions/
         java: ["24"]
     steps:
-      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.71.0
+      - uses: actions/checkout@v6
+      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.75.0
         with:
           java-version: ${{ matrix.java }}
       - shell: bash

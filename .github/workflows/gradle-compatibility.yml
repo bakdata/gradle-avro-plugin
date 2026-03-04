@@ -19,7 +19,8 @@ jobs:
         ]
         java: ["17"]
     steps:
-      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.71.0
+      - uses: actions/checkout@v6
+      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.75.0
         with:
           java-version: ${{ matrix.java }}
       - shell: bash

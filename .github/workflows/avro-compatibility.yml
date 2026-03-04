@@ -15,7 +15,7 @@ jobs:
         gradle: ["7.3", "8.14.4"]
         java: ["17"]
     steps:
-      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.71.0
+      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.75.0
         with:
           java-version: ${{ matrix.java }}
       - shell: bash

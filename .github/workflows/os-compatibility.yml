@@ -14,7 +14,8 @@ jobs:
         java: [17] # Minimum supported major version
         os: [ubuntu-latest, windows-latest, macOS-latest] # All supported OS
     steps:
-      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.71.0
+      - uses: actions/checkout@v6
+      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.75.0
         with:
           java-version: ${{ matrix.java }}
       - shell: bash
