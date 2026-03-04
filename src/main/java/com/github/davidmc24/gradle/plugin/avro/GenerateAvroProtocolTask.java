@@ -17,7 +17,14 @@ package com.github.davidmc24.gradle.plugin.avro;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 import org.apache.avro.Protocol;
 import org.apache.avro.idl.IdlFile;
@@ -76,18 +83,26 @@ public class GenerateAvroProtocolTask extends OutputDirTask {
 
     private void processFiles() {
         int processedFileCount = 0;
+        ClassLoader loader = assembleClassLoader();
         for (File sourceFile : filterSources(new FileExtensionSpec(IDL_EXTENSION))) {
-            processIDLFile(sourceFile);
+            processIDLFile(sourceFile, loader);
             processedFileCount++;
         }
         setDidWork(processedFileCount > 0);
     }
 
-    private void processIDLFile(File idlFile) {
+    private void processIDLFile(File idlFile, ClassLoader loader) {
         getLogger().info("Processing {}", idlFile);
+        ClassLoader previousLoader = Thread.currentThread().getContextClassLoader();
         try {
-            IdlFile idl = new IdlReader().parse(idlFile.toPath());
+            // Set the thread context classloader for IdlReader to use when resolving types
+            // This is scoped to just this method and properly restored
+            Thread.currentThread().setContextClassLoader(loader);
+
+            IdlReader idlReader = new IdlReader();
             File outputDir = getOutputDir().get().getAsFile();
+            String idlContent = Files.readString(idlFile.toPath(), StandardCharsets.UTF_8);
+            final IdlFile idl = idlReader.parse(idlFile.toURI(), idlContent);
             Protocol protocol = idl.getProtocol();
             String filePath = AvroUtils.assemblePath(protocol);
             if (!processedFiles.add(filePath)) {
@@ -99,6 +114,23 @@ public class GenerateAvroProtocolTask extends OutputDirTask {
             getLogger().debug("Wrote {}", protoFile.getPath());
         } catch (IOException | GradleException ex) {
             throw new GradleException(String.format("Failed to compile IDL file %s", idlFile), ex);
+        } finally {
+            // Restore the previous classloader
+            Thread.currentThread().setContextClassLoader(previousLoader);
         }
+    }
+
+    private ClassLoader assembleClassLoader() {
+        getLogger().debug("Using classpath: {}", classpath.getFiles());
+        List<URL> urls = new LinkedList<>();
+        for (File file : classpath) {
+            try {
+                urls.add(file.toURI().toURL());
+            } catch (MalformedURLException e) {
+                getLogger().debug(e.getMessage());
+            }
+        }
+        // No parent classloader; either it's in the specified classpath or it shouldn't be resolved.
+        return new URLClassLoader(urls.toArray(new URL[0]), null);
     }
 }
