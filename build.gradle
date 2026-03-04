@@ -13,7 +13,6 @@ plugins {
 description = "A Gradle plugin to allow easily performing Java code generation for Apache Avro. It supports JSON schema declaration files, JSON protocol declaration files, and Avro IDL files."
 
 group = "com.bakdata.gradle.davidmc24"
-version = "1.9.2-SNAPSHOT"
 
 repositories {
     mavenCentral()
