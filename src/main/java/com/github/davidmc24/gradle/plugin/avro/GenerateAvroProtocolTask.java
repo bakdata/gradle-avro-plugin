@@ -27,6 +27,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import org.apache.avro.Protocol;
+import org.apache.avro.idl.IdlFile;
 import org.apache.avro.idl.IdlReader;
 import org.gradle.api.GradleException;
 import org.gradle.api.file.FileCollection;
@@ -101,7 +102,8 @@ public class GenerateAvroProtocolTask extends OutputDirTask {
             IdlReader idlReader = new IdlReader();
             File outputDir = getOutputDir().get().getAsFile();
             String idlContent = Files.readString(idlFile.toPath(), StandardCharsets.UTF_8);
-            Protocol protocol = idlReader.parse(idlFile.toURI(), idlContent).getProtocol();
+            final IdlFile idl = idlReader.parse(idlFile.toURI(), idlContent);
+            Protocol protocol = idl.getProtocol();
             String filePath = AvroUtils.assemblePath(protocol);
             if (!processedFiles.add(filePath)) {
                 throw new GradleException("File already processed with same namespace and protocol name.");
