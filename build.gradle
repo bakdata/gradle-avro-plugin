@@ -83,6 +83,7 @@ javadoc {
 }
 
 publication {
+    //TODO update
     developers {
         developer {
             id = 'davidmc24'
@@ -160,7 +161,7 @@ codenarc {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(11)
+        languageVersion = JavaLanguageVersion.of(17)
     }
 }
 
