@@ -3,9 +3,9 @@ plugins {
     id "checkstyle"
     id "codenarc"
     id "idea"
-    id "com.bakdata.release" version "2.1.0"
-    id "com.bakdata.sonar" version "2.1.0"
-    id "com.bakdata.sonatype" version "2.1.0"
+    id "com.bakdata.release" version "2.1.1-SNAPSHOT"
+    id "com.bakdata.sonar" version "2.1.1-SNAPSHOT"
+    id "com.bakdata.sonatype" version "2.1.1-SNAPSHOT"
     id "java-gradle-plugin"
     id "com.gradle.plugin-publish" version "2.0.0"
 }
@@ -84,16 +84,14 @@ javadoc {
 }
 
 publication {
-    //TODO update
+    license = 'The Apache License, Version 2.0'
     developers {
         developer {
-            id = 'davidmc24'
-            name = 'David M. Carr'
-            email = 'david@carrclan.us'
+            id = 'philipp94831'
+            name = 'Philipp Schirmer'
         }
     }
     createPublication = false
-    //TODO license
 }
 
 gradlePlugin {
