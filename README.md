@@ -13,16 +13,11 @@ This is a [Gradle](http://www.gradle.org/) plugin to allow easily performing Jav
 
 **NOTE**: Pre-1.10 versions used a different publishing process/namespace.  It is strongly recommended to upgrade to a newer version.  Further details can be found in the [change log](CHANGES.md).
 
-* Currently tested against Java 8, 11, and 17-19
+* Currently tested against Java 17-19
     * Though not supported yet, tests are also run against Java 20 to provide early notification of potential incompatibilities.
     * Java 19 support requires Gradle 7.6 or higher (as per Gradle's release notes)
     * Java 18 support requires Gradle 7.5 or higher (as per Gradle's release notes)
     * Java 17 support requires Gradle 7.3 or higher (as per Gradle's release notes)
-    * Java 16 support requires Gradle 7.0 or higher (as per Gradle's release notes)
-    * Java 15 support requires Gradle 6.7 or higher (as per Gradle's release notes)
-    * Java 14 support requires Gradle 6.3 or higher (as per Gradle's release notes)
-    * Java 13 support requires Gradle 6.0 or higher
-    * Java 8-12 support requires Gradle 5.1 or higher (versions lower than 5.1 are no longer supported)
 * Currently built against Gradle 7.6
     * Currently tested against Gradle 5.1-5.6.4 and 6.0-7.6
 * Currently built against Avro 1.11.3
