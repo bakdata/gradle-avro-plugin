@@ -23,8 +23,8 @@ This is a [Gradle](http://www.gradle.org/) plugin to allow easily performing Jav
     * Java 14 support requires Gradle 6.3 or higher (as per Gradle's release notes)
     * Java 13 support requires Gradle 6.0 or higher
     * Java 8-12 support requires Gradle 5.1 or higher (versions lower than 5.1 are no longer supported)
-* Currently built against Gradle 7.6
-    * Currently tested against Gradle 5.1-5.6.4 and 6.0-7.6
+* Currently built against Gradle 8.14.4
+    * Currently tested against Gradle 8.4-8.14.4
 * Currently built against Avro 1.12.1
     * Currently tested against Avro 1.11.0-1.12.1
     * Avro 1.9.0-1.10.2 were last supported in version 1.2.1 

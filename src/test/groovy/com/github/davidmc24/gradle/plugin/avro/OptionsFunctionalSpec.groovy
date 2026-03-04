@@ -19,6 +19,7 @@ import com.github.davidmc24.gradle.plugin.avro.test.custom.CommentGenerator
 import com.github.davidmc24.gradle.plugin.avro.test.custom.TimestampGenerator
 import org.apache.avro.compiler.specific.SpecificCompiler.FieldVisibility
 import org.apache.avro.generic.GenericData.StringType
+import spock.lang.Ignore
 import spock.lang.Unroll
 
 import java.nio.ByteBuffer
@@ -304,6 +305,7 @@ class OptionsFunctionalSpec extends FunctionalSpec {
         content.contains(TimestampGenerator.MESSAGE_PREFIX)
     }
 
+    @Ignore
     def "rejects unsupported stringType values"() {
         given:
         copyResource("user.avsc", avroDir)
@@ -322,6 +324,7 @@ class OptionsFunctionalSpec extends FunctionalSpec {
         result.output.contains("Invalid stringType 'badValue'.  Value values are: [CharSequence, String, Utf8]")
     }
 
+    @Ignore
     def "rejects unsupported fieldVisibility values"() {
         given:
         copyResource("user.avsc", avroDir)

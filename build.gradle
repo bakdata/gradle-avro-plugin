@@ -29,23 +29,24 @@ repositories {
     mavenCentral()
     maven {
         // Used for snapshot builds for some libraries
-        name 'Sonatype OSS'
-        url 'https://oss.sonatype.org/content/repositories/snapshots'
+        name = 'Sonatype OSS'
+        url = 'https://oss.sonatype.org/content/repositories/snapshots'
     }
 }
 
 def avroVersion = "1.12.1"
 
 // Write the plugin's classpath to a file to share with the tests
-task createClasspathManifest {
-    def outputDir = file("$buildDir/$name")
+tasks.register("createClasspathManifest") {
+    def outputDir = layout.buildDirectory.dir(name)
 
     inputs.files sourceSets.main.runtimeClasspath
     outputs.dir outputDir
 
     doLast {
-        outputDir.mkdirs()
-        file("$outputDir/plugin-classpath.txt").text = sourceSets.main.runtimeClasspath.join("\n")
+        def outputFile = outputDir.get().asFile
+        outputFile.mkdirs()
+        file("$outputFile/plugin-classpath.txt").text = sourceSets.main.runtimeClasspath.join("\n")
     }
 }
 
@@ -74,14 +75,14 @@ dependencies {
     codenarc "org.codehaus.groovy:groovy-all:3.0.9"
 }
 
-tasks.withType(AbstractCompile) {
+tasks.withType(AbstractCompile).configureEach {
     options.encoding = "UTF-8"
 }
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
     options.compilerArgs << "-Xlint:all" << "-Xlint:-options" << "-Werror"
 }
 
-tasks.withType(AbstractArchiveTask) {
+tasks.withType(AbstractArchiveTask).configureEach {
     preserveFileTimestamps = false
     reproducibleFileOrder = true
 }
@@ -146,13 +147,13 @@ signing {
 
 gradlePlugin {
     plugins {
-        avro {
+        create("avro") {
             id = "com.bakdata.gradle.davidmc24.avro"
             implementationClass = "com.github.davidmc24.gradle.plugin.avro.AvroPlugin"
             displayName = "avro"
             description = "Conventions plugin for gradle-avro-plugin"
         }
-        avroBase {
+        create("avroBase") {
             id = "com.bakdata.gradle.davidmc24.avro-base"
             implementationClass = "com.github.davidmc24.gradle.plugin.avro.AvroBasePlugin"
             displayName = "avro-base"
@@ -227,7 +228,7 @@ test {
 //    finalizedBy jacocoTestReport // report is always generated after tests run
 }
 
-tasks.create(name: "testCompatibility", type: Test) {
+tasks.register("testCompatibility", Test) {
     description = "Test cross-compatibility of the plugin with Avro/Gradle"
     group = "Verification"
     useJUnitPlatform()
@@ -236,8 +237,8 @@ tasks.create(name: "testCompatibility", type: Test) {
         gradleVersion: findProperty("gradleVersion"),
     ]
     reports {
-        html.destination = file("$buildDir/reports/tests/compatibility")
-        junitXml.destination = file("$buildDir/reports/tests/compatibility")
+        html.outputLocation = layout.buildDirectory.dir("reports/tests/compatibility")
+        junitXml.outputLocation = layout.buildDirectory.dir("reports/tests/compatibility")
     }
 }
 
@@ -254,9 +255,9 @@ tasks.create(name: "testCompatibility", type: Test) {
 //    }
 //}
 
-tasks.withType(Test) {
-    jvmArgs "-Xss640k"
-    minHeapSize "120m"
-    maxHeapSize "280m"
+tasks.withType(Test).configureEach {
+    jvmArgs = ["-Xss640k"]
+    minHeapSize = "120m"
+    maxHeapSize = "280m"
     maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
 }
