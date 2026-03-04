@@ -43,7 +43,6 @@ class SchemaResolver {
         return processingState;
     }
 
-    @SuppressWarnings("deprecation")
     private void processSchemaFile(ProcessingState processingState, FileState fileState) {
         String path = fileState.getPath();
         logger.debug("Processing {}, excluding types {}", path, fileState.getDuplicateTypeNames());
@@ -51,8 +50,7 @@ class SchemaResolver {
         Map<String, Schema> parserTypes = processingState.determineParserTypes(fileState);
         try {
             Schema.Parser parser = new Schema.Parser();
-            //deprecated in Avro 1.12
-            parser.addTypes(parserTypes);
+            parser.addTypes(parserTypes.values());
             parser.parse(sourceFile);
             Map<String, Schema> typesDefinedInFile = MapUtils.asymmetricDifference(parser.getTypes(), parserTypes);
             processingState.processTypeDefinitions(fileState, typesDefinedInFile);
