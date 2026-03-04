@@ -188,6 +188,11 @@ tasks.register("testCompatibility", Test) {
     }
 }
 
+//do not depend on testCompatibility
+tasks.named("sonar") {
+    dependsOn = [tasks.named("test"), tasks.withType(JacocoReport)]
+}
+
 tasks.withType(Test).configureEach {
     jvmArgs = ["-Xss640k"]
     minHeapSize = "120m"
