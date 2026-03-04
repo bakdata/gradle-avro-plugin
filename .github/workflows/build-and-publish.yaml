@@ -12,7 +12,7 @@ jobs:
     name: Java Gradle
     uses: bakdata/ci-templates/.github/workflows/java-gradle-plugin.yaml@1.75.0
     with:
-      java-version: 21
+      java-version: 17
     secrets:
       sonar-token: ${{ secrets.SONARCLOUD_TOKEN }}
       sonar-organization: ${{ secrets.SONARCLOUD_ORGANIZATION }}
