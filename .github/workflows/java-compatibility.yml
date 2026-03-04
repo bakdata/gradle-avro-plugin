@@ -34,6 +34,7 @@ jobs:
       - uses: actions/checkout@v6
       - uses: bakdata/ci-templates/actions/java-gradle-setup@1.75.0
         with:
+          java-distribution: "zulu"
           java-version: ${{ matrix.java }}
       - shell: bash
         run: ./gradlew testCompatibility -PavroVersion=${{ matrix.avro }} -PgradleVersion=${{ matrix.gradle }}
@@ -49,6 +50,7 @@ jobs:
       - uses: actions/checkout@v6
       - uses: bakdata/ci-templates/actions/java-gradle-setup@1.75.0
         with:
+          java-distribution: "zulu"
           java-version: ${{ matrix.java }}
       - shell: bash
         run: ./gradlew testCompatibility -PavroVersion=${{ matrix.avro }} -PgradleVersion=${{ matrix.gradle }}
@@ -64,6 +66,7 @@ jobs:
       - uses: actions/checkout@v6
       - uses: bakdata/ci-templates/actions/java-gradle-setup@1.75.0
         with:
+          java-distribution: "zulu"
           java-version: ${{ matrix.java }}
       - shell: bash
         run: ./gradlew testCompatibility -PavroVersion=${{ matrix.avro }} -PgradleVersion=${{ matrix.gradle }}
@@ -94,6 +97,7 @@ jobs:
       - uses: actions/checkout@v6
       - uses: bakdata/ci-templates/actions/java-gradle-setup@1.75.0
         with:
+          java-distribution: "zulu"
           java-version: ${{ matrix.java }}
       - shell: bash
         run: ./gradlew testCompatibility -PavroVersion=${{ matrix.avro }} -PgradleVersion=${{ matrix.gradle }}
@@ -109,6 +113,7 @@ jobs:
       - uses: actions/checkout@v6
       - uses: bakdata/ci-templates/actions/java-gradle-setup@1.75.0
         with:
+          java-distribution: "zulu"
           java-version: ${{ matrix.java }}
       - shell: bash
         run: ./gradlew testCompatibility -PavroVersion=${{ matrix.avro }} -PgradleVersion=${{ matrix.gradle }}
@@ -124,6 +129,7 @@ jobs:
       - uses: actions/checkout@v6
       - uses: bakdata/ci-templates/actions/java-gradle-setup@1.75.0
         with:
+          java-distribution: "zulu"
           java-version: ${{ matrix.java }}
       - shell: bash
         run: ./gradlew testCompatibility -PavroVersion=${{ matrix.avro }} -PgradleVersion=${{ matrix.gradle }}
