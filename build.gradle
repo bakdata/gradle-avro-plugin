@@ -172,7 +172,6 @@ test {
         avroVersion: avroVersion,
         gradleVersion: gradle.gradleVersion,
     ]
-//    finalizedBy jacocoTestReport // report is always generated after tests run
 }
 
 tasks.register("testCompatibility", Test) {
@@ -187,12 +186,15 @@ tasks.register("testCompatibility", Test) {
         html.outputLocation = layout.buildDirectory.dir("reports/tests/compatibility")
         junitXml.outputLocation = layout.buildDirectory.dir("reports/tests/compatibility")
     }
-    //FIXME breaks sonar
-    enabled = false
+}
+
+//do not depend on testCompatibility
+tasks.named("sonar") {
+    dependsOn = [tasks.named("test"), tasks.withType(JacocoReport)]
 }
 
 tasks.withType(Test).configureEach {
-    jvmArgs = ["-Xss320k"]
+    jvmArgs = ["-Xss640k"]
     minHeapSize = "120m"
     maxHeapSize = "280m"
     maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
