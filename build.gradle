@@ -27,7 +27,7 @@ repositories {
 def compileAvroVersion = "1.11.3"
 
 // Write the plugin's classpath to a file to share with the tests
-task createClasspathManifest {
+task.register("createClasspathManifest") {
     def outputDir = file("$buildDir/$name")
 
     inputs.files sourceSets.main.runtimeClasspath
@@ -63,14 +63,14 @@ dependencies {
     codenarc "org.codehaus.groovy:groovy-all:3.0.9"
 }
 
-tasks.withType(AbstractCompile) {
+tasks.withType(AbstractCompile).configureEach {
     options.encoding = "UTF-8"
 }
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
     options.compilerArgs << "-Xlint:all" << "-Xlint:-options" << "-Werror"
 }
 
-tasks.withType(AbstractArchiveTask) {
+tasks.withType(AbstractArchiveTask).configureEach {
     preserveFileTimestamps = false
     reproducibleFileOrder = true
 }
@@ -96,13 +96,13 @@ publication {
 
 gradlePlugin {
     plugins {
-        avro {
+        named("avro") {
             id = "com.bakdata.gradle.davidmc24.avro"
             implementationClass = "com.github.davidmc24.gradle.plugin.avro.AvroPlugin"
             displayName = "avro"
             description = "Conventions plugin for gradle-avro-plugin"
         }
-        avroBase {
+        named("avroBase") {
             id = "com.bakdata.gradle.davidmc24.avro-base"
             implementationClass = "com.github.davidmc24.gradle.plugin.avro.AvroBasePlugin"
             displayName = "avro-base"
@@ -173,7 +173,7 @@ test {
 //    finalizedBy jacocoTestReport // report is always generated after tests run
 }
 
-tasks.create(name: "testCompatibility", type: Test) {
+tasks.register("testCompatibility", Test) {
     description = "Test cross-compatibility of the plugin with Avro/Gradle"
     group = "Verification"
     useJUnitPlatform()
@@ -182,14 +182,14 @@ tasks.create(name: "testCompatibility", type: Test) {
         gradleVersion: findProperty("gradleVersion"),
     ]
     reports {
-        html.destination = file("$buildDir/reports/tests/compatibility")
-        junitXml.destination = file("$buildDir/reports/tests/compatibility")
+        html.outputLocation = layout.buildDirectory.dir("reports/tests/compatibility")
+        junitXml.outputLocation = layout.buildDirectory.dir("reports/tests/compatibility")
     }
     //FIXME breaks sonar
     enabled = false
 }
 
-tasks.withType(Test) {
+tasks.withType(Test).configureEach {
     jvmArgs = ["-Xss320k"]
     minHeapSize = "120m"
     maxHeapSize = "280m"
