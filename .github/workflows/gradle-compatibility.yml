@@ -20,7 +20,7 @@ jobs:
         java: ["17"]
     steps:
       - uses: actions/checkout@v6
-      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.75.0
+      - uses: bakdata/ci-templates/actions/java-gradle-setup@feature/repo-branch
         with:
           java-version: ${{ matrix.java }}
       - shell: bash
