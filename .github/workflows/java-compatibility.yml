@@ -17,7 +17,7 @@ jobs:
         java: ["17"]
     steps:
       - uses: actions/checkout@v6
-      - uses: bakdata/ci-templates/actions/java-gradle-setup@feature/repo-branch
+      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.77.0
         with:
           java-version: ${{ matrix.java }}
       - shell: bash
@@ -32,7 +32,7 @@ jobs:
         java: ["18"]
     steps:
       - uses: actions/checkout@v6
-      - uses: bakdata/ci-templates/actions/java-gradle-setup@feature/repo-branch
+      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.77.0
         with:
           java-distribution: "zulu"
           java-version: ${{ matrix.java }}
@@ -48,7 +48,7 @@ jobs:
         java: ["19"]
     steps:
       - uses: actions/checkout@v6
-      - uses: bakdata/ci-templates/actions/java-gradle-setup@feature/repo-branch
+      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.77.0
         with:
           java-distribution: "zulu"
           java-version: ${{ matrix.java }}
@@ -64,7 +64,7 @@ jobs:
         java: ["20"]
     steps:
       - uses: actions/checkout@v6
-      - uses: bakdata/ci-templates/actions/java-gradle-setup@feature/repo-branch
+      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.77.0
         with:
           java-distribution: "zulu"
           java-version: ${{ matrix.java }}
@@ -80,7 +80,7 @@ jobs:
         java: ["21"]
     steps:
       - uses: actions/checkout@v6
-      - uses: bakdata/ci-templates/actions/java-gradle-setup@feature/repo-branch
+      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.77.0
         with:
           java-version: ${{ matrix.java }}
       - shell: bash
@@ -95,7 +95,7 @@ jobs:
         java: ["22"]
     steps:
       - uses: actions/checkout@v6
-      - uses: bakdata/ci-templates/actions/java-gradle-setup@feature/repo-branch
+      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.77.0
         with:
           java-distribution: "zulu"
           java-version: ${{ matrix.java }}
@@ -111,7 +111,7 @@ jobs:
         java: ["23"]
     steps:
       - uses: actions/checkout@v6
-      - uses: bakdata/ci-templates/actions/java-gradle-setup@feature/repo-branch
+      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.77.0
         with:
           java-distribution: "zulu"
           java-version: ${{ matrix.java }}
@@ -127,7 +127,7 @@ jobs:
         java: ["24"]
     steps:
       - uses: actions/checkout@v6
-      - uses: bakdata/ci-templates/actions/java-gradle-setup@feature/repo-branch
+      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.77.0
         with:
           java-distribution: "zulu"
           java-version: ${{ matrix.java }}

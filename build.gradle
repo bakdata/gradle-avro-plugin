@@ -3,9 +3,9 @@ plugins {
     id "checkstyle"
     id "codenarc"
     id "idea"
-    id "com.bakdata.release" version "2.1.1-SNAPSHOT"
-    id "com.bakdata.sonar" version "2.1.1-SNAPSHOT"
-    id "com.bakdata.sonatype" version "2.1.1-SNAPSHOT"
+    id "com.bakdata.release" version "2.2.0"
+    id "com.bakdata.sonar" version "2.2.0"
+    id "com.bakdata.sonatype" version "2.2.0"
     id "java-gradle-plugin"
     id "com.gradle.plugin-publish" version "2.0.0"
 }

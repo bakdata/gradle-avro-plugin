@@ -10,7 +10,7 @@ on:
 jobs:
   build-and-publish:
     name: Java Gradle
-    uses: bakdata/ci-templates/.github/workflows/java-gradle-plugin.yaml@feature/repo-branch
+    uses: bakdata/ci-templates/.github/workflows/java-gradle-plugin.yaml@1.77.0
     with:
       java-version: 17
     secrets:
