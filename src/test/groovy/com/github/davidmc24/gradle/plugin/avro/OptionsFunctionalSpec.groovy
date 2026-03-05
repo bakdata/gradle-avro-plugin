@@ -19,7 +19,6 @@ import com.github.davidmc24.gradle.plugin.avro.test.custom.CommentGenerator
 import com.github.davidmc24.gradle.plugin.avro.test.custom.TimestampGenerator
 import org.apache.avro.compiler.specific.SpecificCompiler.FieldVisibility
 import org.apache.avro.generic.GenericData.StringType
-import spock.lang.Ignore
 import spock.lang.Unroll
 
 import java.nio.ByteBuffer
