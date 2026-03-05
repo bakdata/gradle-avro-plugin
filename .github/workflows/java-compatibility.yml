@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         avro: ["1.11.0"]
-        gradle: ["7.3", "8.14.4"] # See here for latest versions: https://services.gradle.org/versions/
+        gradle: ["8.4", "8.14.4"] # See here for latest versions: https://services.gradle.org/versions/
         java: ["17"]
     steps:
       - uses: actions/checkout@v6
@@ -28,7 +28,7 @@ jobs:
     strategy:
       matrix:
         avro: ["1.11.0"]
-        gradle: ["7.5", "8.14.4"] # See here for latest versions: https://services.gradle.org/versions/
+        gradle: ["8.4", "8.14.4"] # See here for latest versions: https://services.gradle.org/versions/
         java: ["18"]
     steps:
       - uses: actions/checkout@v6
@@ -44,7 +44,7 @@ jobs:
     strategy:
       matrix:
         avro: ["1.11.0"]
-        gradle: ["7.6", "8.14.4"] # See here for latest versions: https://services.gradle.org/versions/
+        gradle: ["8.4", "8.14.4"] # See here for latest versions: https://services.gradle.org/versions/
         java: ["19"]
     steps:
       - uses: actions/checkout@v6
@@ -60,7 +60,7 @@ jobs:
     strategy:
       matrix:
         avro: ["1.11.0"]
-        gradle: ["8.1", "8.14.4"] # See here for latest versions: https://services.gradle.org/versions/
+        gradle: ["8.4", "8.14.4"] # See here for latest versions: https://services.gradle.org/versions/
         java: ["20"]
     steps:
       - uses: actions/checkout@v6

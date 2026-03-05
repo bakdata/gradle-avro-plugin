@@ -19,7 +19,7 @@ This is a [Gradle](http://www.gradle.org/) plugin to allow easily performing Jav
     * Java 22 support requires Gradle 8.7 or higher (as per Gradle's release notes)
     * Java 17-21 support requires Gradle 8.4 or higher (versions lower than 8.4 are no longer supported)
 * Currently built against Gradle 8.14.4
-    * Currently tested against Gradle 7.3-8.14.4
+    * Currently tested against Gradle 8.4-8.14.4
 * Currently built against Avro 1.11.3
     * Currently tested against Avro 1.11.0-1.11.3
     * Avro 1.9.0-1.10.2 were last supported in version 1.2.1 
