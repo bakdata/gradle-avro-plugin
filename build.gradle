@@ -94,18 +94,22 @@ publication {
 }
 
 gradlePlugin {
+    website = "https://github.com/bakdata/gradle-avro-plugin"
+    vcsUrl = "https://github.com/bakdata/gradle-avro-plugin"
     plugins {
         create("avro") {
             id = "com.bakdata.gradle.davidmc24.avro"
             implementationClass = "com.github.davidmc24.gradle.plugin.avro.AvroPlugin"
             displayName = "avro"
             description = "Conventions plugin for gradle-avro-plugin"
+            tags.set(["bakdata", "avro"])
         }
         create("avroBase") {
             id = "com.bakdata.gradle.davidmc24.avro-base"
             implementationClass = "com.github.davidmc24.gradle.plugin.avro.AvroBasePlugin"
             displayName = "avro-base"
             description = "Capabilities plugin for gradle-avro-plugin"
+            tags.set(["bakdata", "avro"])
         }
     }
 }
