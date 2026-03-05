@@ -305,7 +305,6 @@ class OptionsFunctionalSpec extends FunctionalSpec {
         content.contains(TimestampGenerator.MESSAGE_PREFIX)
     }
 
-    @Ignore
     def "rejects unsupported stringType values"() {
         given:
         copyResource("user.avsc", avroDir)
@@ -317,14 +316,13 @@ class OptionsFunctionalSpec extends FunctionalSpec {
         |""".stripMargin()
 
         when:
-        def result = runAndFail("generateAvroJava")
+        def result = runAndFail("generateAvroJava", "--no-configuration-cache")
 
         then:
         result.task(":generateAvroJava").outcome == FAILED
         result.output.contains("Invalid stringType 'badValue'.  Value values are: [CharSequence, String, Utf8]")
     }
 
-    @Ignore
     def "rejects unsupported fieldVisibility values"() {
         given:
         copyResource("user.avsc", avroDir)
@@ -336,7 +334,7 @@ class OptionsFunctionalSpec extends FunctionalSpec {
         |""".stripMargin()
 
         when:
-        def result = runAndFail("generateAvroJava")
+        def result = runAndFail("generateAvroJava", "--no-configuration-cache")
 
         then:
         result.task(":generateAvroJava").outcome == FAILED
