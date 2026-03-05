@@ -151,12 +151,14 @@ gradlePlugin {
             implementationClass = "com.github.davidmc24.gradle.plugin.avro.AvroPlugin"
             displayName = "avro"
             description = "Conventions plugin for gradle-avro-plugin"
+            tags.set(["bakdata", "avro"])
         }
         avroBase {
             id = "com.bakdata.gradle.davidmc24.avro-base"
             implementationClass = "com.github.davidmc24.gradle.plugin.avro.AvroBasePlugin"
             displayName = "avro-base"
             description = "Capabilities plugin for gradle-avro-plugin"
+            tags.set(["bakdata", "avro"])
         }
     }
 }
