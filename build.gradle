@@ -12,7 +12,7 @@ plugins {
 
 description = "A Gradle plugin to allow easily performing Java code generation for Apache Avro. It supports JSON schema declaration files, JSON protocol declaration files, and Avro IDL files."
 
-group = "com.bakdata.gradle.davidmc24"
+group = "com.bakdata.gradle.avro"
 
 repositories {
     mavenCentral()
@@ -95,18 +95,22 @@ publication {
 }
 
 gradlePlugin {
+    website = "https://github.com/bakdata/gradle-avro-plugin"
+    vcsUrl = "https://github.com/bakdata/gradle-avro-plugin"
     plugins {
         create("avro") {
-            id = "com.bakdata.gradle.davidmc24.avro"
-            implementationClass = "com.github.davidmc24.gradle.plugin.avro.AvroPlugin"
+            id = "com.bakdata.gradle.avro"
+            implementationClass = "com.bakdata.gradle.avro.AvroPlugin"
             displayName = "avro"
             description = "Conventions plugin for gradle-avro-plugin"
+            tags.set(["bakdata", "avro"])
         }
         create("avroBase") {
-            id = "com.bakdata.gradle.davidmc24.avro-base"
-            implementationClass = "com.github.davidmc24.gradle.plugin.avro.AvroBasePlugin"
+            id = "com.bakdata.gradle.avro-base"
+            implementationClass = "com.bakdata.gradle.avro.AvroBasePlugin"
             displayName = "avro-base"
             description = "Capabilities plugin for gradle-avro-plugin"
+            tags.set(["bakdata", "avro"])
         }
     }
 }
