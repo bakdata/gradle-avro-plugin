@@ -201,7 +201,7 @@ class SchemaResolverSpec extends Specification {
 
     def "gives a meaningful error message when presented a malformed schema file"() {
         given:
-        def file = new File("src/test/resources/com/github/davidmc24/gradle/plugin/avro/enumMalformed.avsc")
+        def file = new File("src/test/resources/com/bakdata/gradle/avro/enumMalformed.avsc")
         def errorFilePath = file.path
 
         when:
