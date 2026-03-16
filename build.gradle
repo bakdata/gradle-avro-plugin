@@ -20,8 +20,8 @@ plugins {
 // Thus, for now, no coverage reporting, as I place a higher value on testing configuration cache
 // support.
 
-group = "com.github.davidmc24.gradle.plugin"
-version = "1.9.2-SNAPSHOT"
+group = "com.bakdata.gradle.avro"
+version = "2.0.0-SNAPSHOT"
 
 def isCI = System.getenv("CI") == "true"
 
@@ -102,7 +102,7 @@ publishing {
         pom {
             name = "gradle-avro-plugin"
             description = "A Gradle plugin to allow easily performing Java code generation for Apache Avro. It supports JSON schema declaration files, JSON protocol declaration files, and Avro IDL files."
-            url = "https://github.com/davidmc24/gradle-avro-plugin"
+            url = "https://github.com/bakdata/gradle-avro-plugin"
             licenses {
                 license {
                     name = "The Apache License, Version 2.0"
@@ -111,15 +111,14 @@ publishing {
             }
             developers {
                 developer {
-                    id = 'davidmc24'
-                    name = 'David M. Carr'
-                    email = 'david@carrclan.us'
+                    id = 'philipp94831'
+                    name = 'Philipp Schirmer'
                 }
             }
             scm {
-                connection = 'scm:git:https://github.com/davidmc24/gradle-avro-plugin.git'
-                developerConnection = 'scm:git:ssh://github.com/davidmc24/gradle-avro-plugin.git'
-                url = 'https://github.com/davidmc24/gradle-avro-plugin'
+                connection = 'scm:git:https://github.com/bakdata/gradle-avro-plugin.git'
+                developerConnection = 'scm:git:ssh://github.com/bakdata/gradle-avro-plugin.git'
+                url = 'https://github.com/bakdata/gradle-avro-plugin'
             }
         }
     }
@@ -144,18 +143,22 @@ signing {
 }
 
 gradlePlugin {
+    website = "https://github.com/bakdata/gradle-avro-plugin"
+    vcsUrl = "https://github.com/bakdata/gradle-avro-plugin"
     plugins {
         avro {
-            id = "com.github.davidmc24.gradle.plugin.avro"
-            implementationClass = "com.github.davidmc24.gradle.plugin.avro.AvroPlugin"
+            id = "com.bakdata.gradle.avro"
+            implementationClass = "com.bakdata.gradle.avro.AvroPlugin"
             displayName = "avro"
             description = "Conventions plugin for gradle-avro-plugin"
+            tags.set(["bakdata", "avro"])
         }
         avroBase {
-            id = "com.github.davidmc24.gradle.plugin.avro-base"
-            implementationClass = "com.github.davidmc24.gradle.plugin.avro.AvroBasePlugin"
+            id = "com.bakdata.gradle.avro-base"
+            implementationClass = "com.bakdata.gradle.avro.AvroBasePlugin"
             displayName = "avro-base"
             description = "Capabilities plugin for gradle-avro-plugin"
+            tags.set(["bakdata", "avro"])
         }
     }
 }
@@ -254,7 +257,7 @@ tasks.create(name: "testCompatibility", type: Test) {
 //}
 
 tasks.withType(Test) {
-    jvmArgs "-Xss320k"
+    jvmArgs "-Xss640k"
     minHeapSize "120m"
     maxHeapSize "280m"
     maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1

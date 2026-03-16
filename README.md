@@ -1,17 +1,14 @@
-# End of life
-
-This project is no longer maintained.
-Its code has been donated to the [Apache Avro project](http://avro.apache.org/), which will be handling releases going forward.
-
 # Overview
 
 This is a [Gradle](http://www.gradle.org/) plugin to allow easily performing Java code generation for [Apache Avro](http://avro.apache.org/).  It supports JSON schema declaration files, JSON protocol declaration files, and Avro IDL files.
 
-[![Build Status](https://github.com/davidmc24/gradle-avro-plugin/workflows/CI%20Build/badge.svg)](https://github.com/davidmc24/gradle-avro-plugin/actions)
+The original project was developed by [davidmc24](https://github.com/davidmc24/gradle-avro-plugin) but has been archived since end of 2023.
+
+[![Build Status](https://github.com/bakdata/gradle-avro-plugin/workflows/CI%20Build/badge.svg)](https://github.com/bakdata/gradle-avro-plugin/actions)
 
 # Compatibility
 
-**NOTE**: Pre-1.0 versions used a different publishing process/namespace.  It is strongly recommended to upgrade to a newer version.  Further details can be found in the [change log](CHANGES.md).
+**NOTE**: Pre-2.0 versions used a different publishing process/namespace.  It is strongly recommended to upgrade to a newer version.  Further details can be found in the [change log](CHANGES.md).
 
 * Currently tested against Java 8, 11, and 17-19
     * Though not supported yet, tests are also run against Java 20 to provide early notification of potential incompatibilities.
@@ -45,7 +42,7 @@ This is a [Gradle](http://www.gradle.org/) plugin to allow easily performing Jav
 
 # Usage
 
-Add the following to your build files.  Substitute the desired version based on [CHANGES.md](https://github.com/davidmc24/gradle-avro-plugin/blob/master/CHANGES.md).
+Add the following to your build files.  Substitute the desired version based on [CHANGES.md](https://github.com/bakdata/gradle-avro-plugin/blob/master/CHANGES.md).
 
 `settings.gradle`:
 ```groovy
@@ -60,7 +57,7 @@ pluginManagement {
 `build.gradle`:
 ```groovy
 plugins {
-    id "com.github.davidmc24.gradle.plugin.avro" version "VERSION"
+    id "com.bakdata.gradle.avro" version "VERSION"
 }
 ```
 
@@ -276,8 +273,8 @@ dependencies {
 
 avro {
     conversionsAndTypeFactoriesClasspath.from(configurations.customConversions)
-    logicalTypeFactoryClassNames.put("timezone", "com.github.davidmc24.gradle.plugin.avro.test.custom.TimeZoneLogicalTypeFactory")
-    customConversionClassNames.add("com.github.davidmc24.gradle.plugin.avro.test.custom.TimeZoneConversion")
+    logicalTypeFactoryClassNames.put("timezone", "com.bakdata.gradle.avro.test.custom.TimeZoneLogicalTypeFactory")
+    customConversionClassNames.add("com.bakdata.gradle.avro.test.custom.TimeZoneConversion")
 }
 ```
 
@@ -290,15 +287,16 @@ If you do it in the other order, IntelliJ may not properly exclude some director
 # Alternate Usage
 
 If the defaults used by the plugin don't work for you, you can still use the tasks by themselves.
-In this case, use the `com.github.davidmc24.gradle.plugin.avro-base` plugin instead, and create tasks of type `GenerateAvroJavaTask` and/or `GenerateAvroProtocolTask`.
+In this case, use the `com.bakdata.gradle.avro-base` plugin instead, and create tasks of type
+`GenerateAvroJavaTask` and/or `GenerateAvroProtocolTask`.
 
 Here's a short example of what this might look like:
 
 ```groovy
-import com.github.davidmc24.gradle.plugin.avro.GenerateAvroJavaTask
+import com.bakdata.gradle.avro.GenerateAvroJavaTask
 
 apply plugin: "java"
-apply plugin: "com.github.davidmc24.gradle.plugin.avro-base"
+apply plugin: "com.bakdata.gradle.avro-base"
 
 dependencies {
     implementation "org.apache.avro:avro:1.11.0"
@@ -390,8 +388,8 @@ In `gradle.build.kts` add:
 
 ```kotlin
 plugins {
-    // Find latest release here: https://github.com/davidmc24/gradle-avro-plugin/releases
-    id("com.github.davidmc24.gradle.plugin.avro") version "VERSION"
+    // Find latest release here: https://github.com/bakdata/gradle-avro-plugin/releases
+    id("com.bakdata.gradle.avro") version "VERSION"
 }
 ```
 
@@ -429,9 +427,9 @@ If desired, you can generate JSON schema with dependencies resolved.
 Example build:
 
 ```groovy
-import com.github.davidmc24.gradle.plugin.avro.ResolveAvroDependenciesTask
+import com.bakdata.gradle.avro.ResolveAvroDependenciesTask
 
-apply plugin: "com.github.davidmc24.gradle.plugin.avro-base"
+apply plugin: "com.bakdata.gradle.avro-base"
 
 tasks.register("resolveAvroDependencies", ResolveAvroDependenciesTask) {
     source file("src/avro/normalized")
@@ -449,10 +447,10 @@ From IDL files, first use `GenerateAvroProtocolTask` to convert the IDL files to
 Example using base plugin with support for both IDL and JSON protocol files in `src/main/avro`:
 
 ```groovy
-import com.github.davidmc24.gradle.plugin.avro.GenerateAvroProtocolTask
-import com.github.davidmc24.gradle.plugin.avro.GenerateAvroSchemaTask
+import com.bakdata.gradle.avro.GenerateAvroProtocolTask
+import com.bakdata.gradle.avro.GenerateAvroSchemaTask
 
-apply plugin: "com.github.davidmc24.gradle.plugin.avro-base"
+apply plugin: "com.bakdata.gradle.avro-base"
 
 def generateProtocol = tasks.register("generateProtocol", GenerateAvroProtocolTask) {
     source file("src/main/avro")
