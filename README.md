@@ -2,8 +2,7 @@
 
 This is a [Gradle](http://www.gradle.org/) plugin to allow easily performing Java code generation for [Apache Avro](http://avro.apache.org/).  It supports JSON schema declaration files, JSON protocol declaration files, and Avro IDL files.
 
-It was originally developed by [davidmc24](https://github.com/davidmc24/gradle-avro-plugin) but has been archived since end of 2023.
-
+The original project was developed by [davidmc24](https://github.com/davidmc24/gradle-avro-plugin) but has been archived since end of 2023.
 [![Build Status](https://github.com/bakdata/gradle-avro-plugin/workflows/CI%20Build/badge.svg)](https://github.com/bakdata/gradle-avro-plugin/actions)
 
 # Compatibility
