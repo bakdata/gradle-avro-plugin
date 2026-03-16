@@ -1,7 +1,7 @@
 plugins {
     id("idea")
-    id("com.bakdata.gradle.avro") version ("1.10.0")
-//    id "com.bakdata.gradle.avro" version "1.10.1-SNAPSHOT"
+    id("com.bakdata.gradle.avro") version ("2.0.0")
+//    id "com.bakdata.gradle.avro" version "2.0.1-SNAPSHOT"
 }
 
 repositories {
