@@ -198,4 +198,17 @@ class SchemaResolverSpec extends Specification {
         def ex = thrown(GradleException)
         ex.message == "Failed to resolve schema definition file ${file.path}; contains duplicate type definition example.avro.date"
     }
+
+    def "gives a meaningful error message when presented a malformed schema file"() {
+        given:
+        def file = new File("src/test/resources/com/bakdata/gradle/avro/enumMalformed.avsc")
+        def errorFilePath = file.path
+
+        when:
+        resolver.resolve([file])
+
+        then:
+        def ex = thrown(GradleException)
+        ex.message.contains("* $errorFilePath: Undefined schema: example.avro.enum")
+    }
 }

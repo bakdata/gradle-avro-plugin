@@ -11,7 +11,7 @@ configurations {
     additionalSchema
 }
 dependencies {
-    implementation "org.apache.avro:avro:1.10.1"
+    implementation "org.apache.avro:avro:1.12.1"
     additionalSchema project(":schema")
 }
 

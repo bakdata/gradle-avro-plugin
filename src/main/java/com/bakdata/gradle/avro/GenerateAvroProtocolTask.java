@@ -25,8 +25,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import org.apache.avro.Protocol;
-import org.apache.avro.compiler.idl.Idl;
-import org.apache.avro.compiler.idl.ParseException;
+import org.apache.avro.idl.IdlFile;
+import org.apache.avro.idl.IdlReader;
 import org.gradle.api.GradleException;
 import org.gradle.api.file.FileCollection;
 import org.gradle.api.specs.NotSpec;
@@ -37,7 +37,7 @@ import org.gradle.api.tasks.TaskAction;
 import static com.bakdata.gradle.avro.Constants.IDL_EXTENSION;
 
 /**
- * Task to convert Avro IDL files into Avro protocol files using {@link Idl}.
+ * Task to convert Avro IDL files into Avro protocol files using {@link IdlReader}.
  */
 @CacheableTask
 public class GenerateAvroProtocolTask extends OutputDirTask {
@@ -89,11 +89,18 @@ public class GenerateAvroProtocolTask extends OutputDirTask {
         setDidWork(processedFileCount > 0);
     }
 
-    private void processIDLFile(File idlFile, ClassLoader loader) {
+    private void processIDLFile(File idlFile, ClassLoader resourceClassLoader) {
         getLogger().info("Processing {}", idlFile);
-        try (Idl idl = new Idl(idlFile, loader)) {
+        ClassLoader mainClassLoader = Thread.currentThread().getContextClassLoader();
+        try {
+            // Set the thread context classloader for IdlReader to use when resolving types
+            // This is scoped to just this method and properly restored
+            Thread.currentThread().setContextClassLoader(resourceClassLoader);
+
+            IdlReader idlReader = new IdlReader();
             File outputDir = getOutputDir().get().getAsFile();
-            Protocol protocol = idl.CompilationUnit();
+            final IdlFile idl = idlReader.parse(idlFile.toPath());
+            Protocol protocol = idl.getProtocol();
             String filePath = AvroUtils.assemblePath(protocol);
             if (!processedFiles.add(filePath)) {
                 throw new GradleException("File already processed with same namespace and protocol name.");
@@ -102,8 +109,11 @@ public class GenerateAvroProtocolTask extends OutputDirTask {
             String protoJson = protocol.toString(true);
             FileUtils.writeJsonFile(protoFile, protoJson);
             getLogger().debug("Wrote {}", protoFile.getPath());
-        } catch (IOException | ParseException | GradleException ex) {
+        } catch (IOException | GradleException ex) {
             throw new GradleException(String.format("Failed to compile IDL file %s", idlFile), ex);
+        } finally {
+            // Restore the previous classloader
+            Thread.currentThread().setContextClassLoader(mainClassLoader);
         }
     }
 

@@ -1,6 +1,7 @@
 package com.bakdata.gradle.avro
 
 
+import org.apache.avro.NameValidator
 import org.apache.avro.Protocol
 import org.apache.avro.Schema
 import spock.lang.Specification
@@ -55,12 +56,13 @@ class AvroUtilsSpec extends Specification {
     }
 
     Schema createSchema(String namespace, String name, boolean disableNameValidation = false) {
+        def oldValidator = Schema.VALIDATE_NAMES.get()
         if (disableNameValidation) {
-            Schema.validateNames.set(false)
+            Schema.VALIDATE_NAMES.set(NameValidator.NO_VALIDATION)
         }
         def schema = Schema.createRecord(name, null, namespace, false, Collections.emptyList())
         if (disableNameValidation) {
-            Schema.validateNames.set(true)
+            Schema.VALIDATE_NAMES.set(oldValidator)
         }
         return schema
     }

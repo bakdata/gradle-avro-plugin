@@ -17,6 +17,7 @@ package com.bakdata.gradle.avro;
 
 import java.io.File;
 import java.io.IOException;
+import org.apache.avro.JsonSchemaFormatter;
 import org.apache.avro.Protocol;
 import org.apache.avro.Schema;
 import org.gradle.api.GradleException;
@@ -57,7 +58,7 @@ public class GenerateAvroSchemaTask extends OutputDirTask {
             Protocol protocol = Protocol.parse(sourceFile);
             for (Schema schema : protocol.getTypes()) {
                 File schemaFile = new File(getOutputDir().get().getAsFile(), AvroUtils.assemblePath(schema));
-                String schemaJson = schema.toString(true);
+                String schemaJson = new JsonSchemaFormatter(true).format(schema);
                 FileUtils.writeJsonFile(schemaFile, schemaJson);
                 getLogger().debug("Wrote {}", schemaFile.getPath());
             }
