@@ -315,7 +315,7 @@ class OptionsFunctionalSpec extends FunctionalSpec {
         |""".stripMargin()
 
         when:
-        def result = runAndFail("generateAvroJava")
+        def result = runAndFail("generateAvroJava", "--no-configuration-cache")
 
         then:
         result.task(":generateAvroJava").outcome == FAILED
@@ -333,7 +333,7 @@ class OptionsFunctionalSpec extends FunctionalSpec {
         |""".stripMargin()
 
         when:
-        def result = runAndFail("generateAvroJava")
+        def result = runAndFail("generateAvroJava", "--no-configuration-cache")
 
         then:
         result.task(":generateAvroJava").outcome == FAILED

@@ -3,49 +3,39 @@ plugins {
     id "checkstyle"
     id "codenarc"
     id "idea"
-//    id "jacoco"
-    id "maven-publish"
-    id "signing"
+    id "com.bakdata.release" version "2.2.0"
+    id "com.bakdata.sonar" version "2.2.0"
+    id "com.bakdata.sonatype" version "2.2.0"
     id "java-gradle-plugin"
-    id "org.nosphere.gradle.github.actions" version "1.2.0"
-    id "io.github.gradle-nexus.publish-plugin" version "1.0.0"
-//    id "pl.droidsonroids.jacoco.testkit" version "1.0.8"
+    id "com.gradle.plugin-publish" version "2.0.0"
 }
 
-// Gradle TestKit (which most of this plugins tests run using) runs the builds in a separate
-// JVM than the tests.  Thus, for Jacoco to pick up on it, you need to do some extra legwork.
-// https://github.com/koral--/jacoco-gradle-testkit-plugin seeks to solve that
-// However, Gradle 7.1 doesn't currently support the combination of the configuration cache
-// with a Java agent (such as Jacoco) and TestKit.
-// Thus, for now, no coverage reporting, as I place a higher value on testing configuration cache
-// support.
+description = "A Gradle plugin to allow easily performing Java code generation for Apache Avro. It supports JSON schema declaration files, JSON protocol declaration files, and Avro IDL files."
 
 group = "com.bakdata.gradle.avro"
-version = "2.0.0-SNAPSHOT"
-
-def isCI = System.getenv("CI") == "true"
 
 repositories {
     mavenCentral()
     maven {
         // Used for snapshot builds for some libraries
-        name 'Sonatype OSS'
-        url 'https://oss.sonatype.org/content/repositories/snapshots'
+        name = 'Sonatype OSS'
+        url = 'https://oss.sonatype.org/content/repositories/snapshots'
     }
 }
 
 def compileAvroVersion = "1.11.3"
 
 // Write the plugin's classpath to a file to share with the tests
-task createClasspathManifest {
-    def outputDir = file("$buildDir/$name")
+tasks.register("createClasspathManifest") {
+    def outputDir = layout.buildDirectory.dir(name)
 
     inputs.files sourceSets.main.runtimeClasspath
     outputs.dir outputDir
 
     doLast {
-        outputDir.mkdirs()
-        file("$outputDir/plugin-classpath.txt").text = sourceSets.main.runtimeClasspath.join("\n")
+        def outputFile = outputDir.get().asFile
+        outputFile.mkdirs()
+        file("$outputFile/plugin-classpath.txt").text = sourceSets.main.runtimeClasspath.join("\n")
     }
 }
 
@@ -73,21 +63,16 @@ dependencies {
     codenarc "org.codehaus.groovy:groovy-all:3.0.9"
 }
 
-tasks.withType(AbstractCompile) {
+tasks.withType(AbstractCompile).configureEach {
     options.encoding = "UTF-8"
 }
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
     options.compilerArgs << "-Xlint:all" << "-Xlint:-options" << "-Werror"
 }
 
-tasks.withType(AbstractArchiveTask) {
+tasks.withType(AbstractArchiveTask).configureEach {
     preserveFileTimestamps = false
     reproducibleFileOrder = true
-}
-
-java {
-    withJavadocJar()
-    withSourcesJar()
 }
 
 javadoc {
@@ -97,63 +82,29 @@ javadoc {
     options.addStringOption('Xdoclint:none', '-quiet')
 }
 
-publishing {
-    publications.withType(MavenPublication) {
-        pom {
-            name = "gradle-avro-plugin"
-            description = "A Gradle plugin to allow easily performing Java code generation for Apache Avro. It supports JSON schema declaration files, JSON protocol declaration files, and Avro IDL files."
-            url = "https://github.com/bakdata/gradle-avro-plugin"
-            licenses {
-                license {
-                    name = "The Apache License, Version 2.0"
-                    url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
-                }
-            }
-            developers {
-                developer {
-                    id = 'philipp94831'
-                    name = 'Philipp Schirmer'
-                }
-            }
-            scm {
-                connection = 'scm:git:https://github.com/bakdata/gradle-avro-plugin.git'
-                developerConnection = 'scm:git:ssh://github.com/bakdata/gradle-avro-plugin.git'
-                url = 'https://github.com/bakdata/gradle-avro-plugin'
-            }
+publication {
+    license = 'The Apache License, Version 2.0'
+    developers {
+        developer {
+            id = 'philipp94831'
+            name = 'Philipp Schirmer'
         }
     }
-}
-
-nexusPublishing {
-    repositories {
-        sonatype()
-    }
-}
-
-signing {
-    if (isCI) {
-        def signingKeyId = System.getenv("SIGNING_KEY_ID")
-        def signingKey = System.getenv("SIGNING_KEY")
-        def signingPassword = System.getenv("SIGNING_PASSWORD")
-        useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
-    }
-    publishing.publications.all { publication ->
-        sign publication
-    }
+    createPublication = false
 }
 
 gradlePlugin {
     website = "https://github.com/bakdata/gradle-avro-plugin"
     vcsUrl = "https://github.com/bakdata/gradle-avro-plugin"
     plugins {
-        avro {
+        create("avro") {
             id = "com.bakdata.gradle.avro"
             implementationClass = "com.bakdata.gradle.avro.AvroPlugin"
             displayName = "avro"
             description = "Conventions plugin for gradle-avro-plugin"
             tags.set(["bakdata", "avro"])
         }
-        avroBase {
+        create("avroBase") {
             id = "com.bakdata.gradle.avro-base"
             implementationClass = "com.bakdata.gradle.avro.AvroBasePlugin"
             displayName = "avro-base"
@@ -210,14 +161,10 @@ codenarc {
 //    toolVersion = "2.2.0"
 }
 
-// Java 8+ is required due to requirements introduced in Avro 1.9.0
-// Java 8+ is also required by Gradle 5.x
-if (JavaVersion.current().java10Compatible) {
-    compileJava {
-        options.release = 8
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
     }
-} else {
-    sourceCompatibility = 8
 }
 
 test {
@@ -226,10 +173,9 @@ test {
         avroVersion: compileAvroVersion,
         gradleVersion: gradle.gradleVersion,
     ]
-//    finalizedBy jacocoTestReport // report is always generated after tests run
 }
 
-tasks.create(name: "testCompatibility", type: Test) {
+tasks.register("testCompatibility", Test) {
     description = "Test cross-compatibility of the plugin with Avro/Gradle"
     group = "Verification"
     useJUnitPlatform()
@@ -238,27 +184,19 @@ tasks.create(name: "testCompatibility", type: Test) {
         gradleVersion: findProperty("gradleVersion"),
     ]
     reports {
-        html.destination = file("$buildDir/reports/tests/compatibility")
-        junitXml.destination = file("$buildDir/reports/tests/compatibility")
+        html.outputLocation = layout.buildDirectory.dir("reports/tests/compatibility")
+        junitXml.outputLocation = layout.buildDirectory.dir("reports/tests/compatibility")
     }
 }
 
-//jacoco {
-//    // 0.8.7+ needed for Java 15 support
-//    // See https://www.jacoco.org/jacoco/trunk/doc/changes.html
-//    toolVersion = "0.8.7-SNAPSHOT"
-//}
+//do not depend on testCompatibility
+tasks.named("sonar") {
+    dependsOn = [tasks.named("test"), tasks.withType(JacocoReport)]
+}
 
-//jacocoTestReport {
-//    reports {
-//        html.enabled true
-//        xml.enabled true
-//    }
-//}
-
-tasks.withType(Test) {
-    jvmArgs "-Xss640k"
-    minHeapSize "120m"
-    maxHeapSize "280m"
+tasks.withType(Test).configureEach {
+    jvmArgs = ["-Xss640k"]
+    minHeapSize = "120m"
+    maxHeapSize = "280m"
     maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
 }
