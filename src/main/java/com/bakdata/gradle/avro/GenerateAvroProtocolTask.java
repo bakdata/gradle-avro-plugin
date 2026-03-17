@@ -101,8 +101,7 @@ public class GenerateAvroProtocolTask extends OutputDirTask {
 
             IdlReader idlReader = new IdlReader();
             File outputDir = getOutputDir().get().getAsFile();
-            String idlContent = Files.readString(idlFile.toPath(), StandardCharsets.UTF_8);
-            final IdlFile idl = idlReader.parse(idlFile.toURI(), idlContent);
+            final IdlFile idl = idlReader.parse(idlFile.toPath());
             Protocol protocol = idl.getProtocol();
             String filePath = AvroUtils.assemblePath(protocol);
             if (!processedFiles.add(filePath)) {
