@@ -91,13 +91,13 @@ public class GenerateAvroProtocolTask extends OutputDirTask {
         setDidWork(processedFileCount > 0);
     }
 
-    private void processIDLFile(File idlFile, ClassLoader loader) {
+    private void processIDLFile(File idlFile, ClassLoader resourceClassLoader) {
         getLogger().info("Processing {}", idlFile);
-        ClassLoader previousLoader = Thread.currentThread().getContextClassLoader();
+        ClassLoader mainClassLoader = Thread.currentThread().getContextClassLoader();
         try {
             // Set the thread context classloader for IdlReader to use when resolving types
             // This is scoped to just this method and properly restored
-            Thread.currentThread().setContextClassLoader(loader);
+            Thread.currentThread().setContextClassLoader(resourceClassLoader);
 
             IdlReader idlReader = new IdlReader();
             File outputDir = getOutputDir().get().getAsFile();
@@ -116,7 +116,7 @@ public class GenerateAvroProtocolTask extends OutputDirTask {
             throw new GradleException(String.format("Failed to compile IDL file %s", idlFile), ex);
         } finally {
             // Restore the previous classloader
-            Thread.currentThread().setContextClassLoader(previousLoader);
+            Thread.currentThread().setContextClassLoader(mainClassLoader);
         }
     }
 
