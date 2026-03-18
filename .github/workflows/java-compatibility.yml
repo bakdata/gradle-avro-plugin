@@ -12,7 +12,7 @@ jobs:
     runs-on: "ubuntu-latest"
     strategy:
       matrix:
-        avro: ["1.12.1"]
+        avro: ["1.12.2-SNAPSHOT"]
         gradle: ["8.4", "8.14.4"] # See here for latest versions: https://services.gradle.org/versions/
         java: ["17"]
     steps:
@@ -27,7 +27,7 @@ jobs:
     runs-on: "ubuntu-latest"
     strategy:
       matrix:
-        avro: ["1.12.1"]
+        avro: ["1.12.2-SNAPSHOT"]
         gradle: ["8.4", "8.14.4"] # See here for latest versions: https://services.gradle.org/versions/
         java: ["18"]
     steps:
@@ -43,7 +43,7 @@ jobs:
     runs-on: "ubuntu-latest"
     strategy:
       matrix:
-        avro: ["1.12.1"]
+        avro: ["1.12.2-SNAPSHOT"]
         gradle: ["8.4", "8.14.4"] # See here for latest versions: https://services.gradle.org/versions/
         java: ["19"]
     steps:
@@ -59,7 +59,7 @@ jobs:
     runs-on: "ubuntu-latest"
     strategy:
       matrix:
-        avro: ["1.12.1"]
+        avro: ["1.12.2-SNAPSHOT"]
         gradle: ["8.4", "8.14.4"] # See here for latest versions: https://services.gradle.org/versions/
         java: ["20"]
     steps:
@@ -75,7 +75,7 @@ jobs:
     runs-on: "ubuntu-latest"
     strategy:
       matrix:
-        avro: ["1.12.1"]
+        avro: ["1.12.2-SNAPSHOT"]
         gradle: ["8.4", "8.14.4"] # See here for latest versions: https://services.gradle.org/versions/
         java: ["21"]
     steps:
@@ -90,7 +90,7 @@ jobs:
     runs-on: "ubuntu-latest"
     strategy:
       matrix:
-        avro: ["1.12.1"]
+        avro: ["1.12.2-SNAPSHOT"]
         gradle: ["8.7", "8.14.4"] # See here for latest versions: https://services.gradle.org/versions/
         java: ["22"]
     steps:
@@ -106,7 +106,7 @@ jobs:
     runs-on: "ubuntu-latest"
     strategy:
       matrix:
-        avro: ["1.12.1"]
+        avro: ["1.12.2-SNAPSHOT"]
         gradle: ["8.10", "8.14.4"] # See here for latest versions: https://services.gradle.org/versions/
         java: ["23"]
     steps:
@@ -122,7 +122,7 @@ jobs:
     runs-on: "ubuntu-latest"
     strategy:
       matrix:
-        avro: ["1.12.1"]
+        avro: ["1.12.2-SNAPSHOT"]
         gradle: ["8.14", "8.14.4"] # See here for latest versions: https://services.gradle.org/versions/
         java: ["24"]
     steps:

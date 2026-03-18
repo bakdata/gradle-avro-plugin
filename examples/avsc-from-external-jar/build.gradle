@@ -6,7 +6,7 @@ repositories {
     mavenCentral()
 }
 dependencies {
-    implementation "org.apache.avro:avro:1.12.1"
+    implementation "org.apache.avro:avro:1.12.2"
 }
 
 generateAvroJava {

@@ -21,9 +21,12 @@ repositories {
         name = 'Sonatype OSS'
         url = 'https://oss.sonatype.org/content/repositories/snapshots'
     }
+    maven {
+        url = "https://repository.apache.org/content/groups/snapshots"
+    }
 }
 
-def avroVersion = "1.12.1"
+def avroVersion = "1.12.2-SNAPSHOT"
 
 // Write the plugin's classpath to a file to share with the tests
 tasks.register("createClasspathManifest") {
