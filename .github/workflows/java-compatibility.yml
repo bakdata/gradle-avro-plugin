@@ -7,129 +7,53 @@ on:
       - master
   pull_request:
 jobs:
-  java17:
+  test:
     name: "Compatibility: java ${{ matrix.java }}/gradle ${{ matrix.gradle }}"
     runs-on: "ubuntu-latest"
     strategy:
+      fail-fast: false
       matrix:
-        avro: ["1.12.1"]
         gradle: ["8.4", "8.14.4"] # See here for latest versions: https://services.gradle.org/versions/
-        java: ["17"]
+        java: ["17", "18", "19", "20", "21", "22", "23", "24"]
+        exclude:
+          - java: "22"
+            gradle: "8.4"
+          - java: "23"
+            gradle: "8.4"
+          - java: "24"
+            gradle: "8.4"
+        include:
+          - java: "22"
+            gradle: "8.7"
+            distribution: "zulu"
+          - java: "23"
+            gradle: "8.10"
+            distribution: "zulu"
+          - java: "24"
+            gradle: "8.14"
+            distribution: "zulu"
+          - java: "18"
+            distribution: "zulu"
+          - java: "19"
+            distribution: "zulu"
+          - java: "20"
+            distribution: "zulu"
+          - java: "22"
+            distribution: "zulu"
+          - java: "23"
+            distribution: "zulu"
+          - java: "24"
+            distribution: "zulu"
     steps:
       - uses: actions/checkout@v6
       - uses: bakdata/ci-templates/actions/java-gradle-setup@1.77.0
+        if: matrix.distribution != null
         with:
+          java-distribution: ${{ matrix.distribution }}
           java-version: ${{ matrix.java }}
-      - shell: bash
-        run: ./gradlew testCompatibility -PavroVersion=${{ matrix.avro }} -PgradleVersion=${{ matrix.gradle }}
-  java18:
-    name: "Compatibility: java ${{ matrix.java }}/gradle ${{ matrix.gradle }}"
-    runs-on: "ubuntu-latest"
-    strategy:
-      matrix:
-        avro: ["1.12.1"]
-        gradle: ["8.4", "8.14.4"] # See here for latest versions: https://services.gradle.org/versions/
-        java: ["18"]
-    steps:
-      - uses: actions/checkout@v6
       - uses: bakdata/ci-templates/actions/java-gradle-setup@1.77.0
-        with:
-          java-distribution: "zulu"
-          java-version: ${{ matrix.java }}
-      - shell: bash
-        run: ./gradlew testCompatibility -PavroVersion=${{ matrix.avro }} -PgradleVersion=${{ matrix.gradle }}
-  java-19:
-    name: "Compatibility: java ${{ matrix.java }}/gradle ${{ matrix.gradle }}"
-    runs-on: "ubuntu-latest"
-    strategy:
-      matrix:
-        avro: ["1.12.1"]
-        gradle: ["8.4", "8.14.4"] # See here for latest versions: https://services.gradle.org/versions/
-        java: ["19"]
-    steps:
-      - uses: actions/checkout@v6
-      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.77.0
-        with:
-          java-distribution: "zulu"
-          java-version: ${{ matrix.java }}
-      - shell: bash
-        run: ./gradlew testCompatibility -PavroVersion=${{ matrix.avro }} -PgradleVersion=${{ matrix.gradle }}
-  java-20:
-    name: "Compatibility: java ${{ matrix.java }}/gradle ${{ matrix.gradle }}"
-    runs-on: "ubuntu-latest"
-    strategy:
-      matrix:
-        avro: ["1.12.1"]
-        gradle: ["8.4", "8.14.4"] # See here for latest versions: https://services.gradle.org/versions/
-        java: ["20"]
-    steps:
-      - uses: actions/checkout@v6
-      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.77.0
-        with:
-          java-distribution: "zulu"
-          java-version: ${{ matrix.java }}
-      - shell: bash
-        run: ./gradlew testCompatibility -PavroVersion=${{ matrix.avro }} -PgradleVersion=${{ matrix.gradle }}
-  java-21:
-    name: "Compatibility: java ${{ matrix.java }}/gradle ${{ matrix.gradle }}"
-    runs-on: "ubuntu-latest"
-    strategy:
-      matrix:
-        avro: ["1.12.1"]
-        gradle: ["8.4", "8.14.4"] # See here for latest versions: https://services.gradle.org/versions/
-        java: ["21"]
-    steps:
-      - uses: actions/checkout@v6
-      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.77.0
+        if: matrix.distribution == null
         with:
           java-version: ${{ matrix.java }}
       - shell: bash
-        run: ./gradlew testCompatibility -PavroVersion=${{ matrix.avro }} -PgradleVersion=${{ matrix.gradle }}
-  java-22:
-    name: "Compatibility: java ${{ matrix.java }}/gradle ${{ matrix.gradle }}"
-    runs-on: "ubuntu-latest"
-    strategy:
-      matrix:
-        avro: ["1.12.1"]
-        gradle: ["8.7", "8.14.4"] # See here for latest versions: https://services.gradle.org/versions/
-        java: ["22"]
-    steps:
-      - uses: actions/checkout@v6
-      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.77.0
-        with:
-          java-distribution: "zulu"
-          java-version: ${{ matrix.java }}
-      - shell: bash
-        run: ./gradlew testCompatibility -PavroVersion=${{ matrix.avro }} -PgradleVersion=${{ matrix.gradle }}
-  java-23:
-    name: "Compatibility: java ${{ matrix.java }}/gradle ${{ matrix.gradle }}"
-    runs-on: "ubuntu-latest"
-    strategy:
-      matrix:
-        avro: ["1.12.1"]
-        gradle: ["8.10", "8.14.4"] # See here for latest versions: https://services.gradle.org/versions/
-        java: ["23"]
-    steps:
-      - uses: actions/checkout@v6
-      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.77.0
-        with:
-          java-distribution: "zulu"
-          java-version: ${{ matrix.java }}
-      - shell: bash
-        run: ./gradlew testCompatibility -PavroVersion=${{ matrix.avro }} -PgradleVersion=${{ matrix.gradle }}
-  java-24:
-    name: "Compatibility: java ${{ matrix.java }}/gradle ${{ matrix.gradle }}"
-    runs-on: "ubuntu-latest"
-    strategy:
-      matrix:
-        avro: ["1.12.1"]
-        gradle: ["8.14", "8.14.4"] # See here for latest versions: https://services.gradle.org/versions/
-        java: ["24"]
-    steps:
-      - uses: actions/checkout@v6
-      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.77.0
-        with:
-          java-distribution: "zulu"
-          java-version: ${{ matrix.java }}
-      - shell: bash
-        run: ./gradlew testCompatibility -PavroVersion=${{ matrix.avro }} -PgradleVersion=${{ matrix.gradle }}
+        run: ./gradlew testCompatibility -PavroVersion=1.12.1 -PgradleVersion=${{ matrix.gradle }}
