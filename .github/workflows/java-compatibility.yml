@@ -36,16 +36,12 @@ jobs:
             gradle: "8.14"
             avro: "1.12.1"
             distribution: "zulu"
-          - java: "17"
-            distribution: "temurin"
           - java: "18"
             distribution: "zulu"
           - java: "19"
             distribution: "zulu"
           - java: "20"
             distribution: "zulu"
-          - java: "21"
-            distribution: "temurin"
           - java: "22"
             distribution: "zulu"
           - java: "23"
@@ -55,8 +51,13 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: bakdata/ci-templates/actions/java-gradle-setup@1.77.0
+        if: matrix.distribution != null
         with:
           java-distribution: ${{ matrix.distribution }}
+          java-version: ${{ matrix.java }}
+      - uses: bakdata/ci-templates/actions/java-gradle-setup@1.77.0
+        if: matrix.distribution == null
+        with:
           java-version: ${{ matrix.java }}
       - shell: bash
         run: ./gradlew testCompatibility -PavroVersion=${{ matrix.avro }} -PgradleVersion=${{ matrix.gradle }}
