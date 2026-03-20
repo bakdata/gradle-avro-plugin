@@ -5,6 +5,7 @@ on:
     tags: ["**"]
     branches:
       - master
+      - refactor/java-compatibility-ci
   pull_request:
 jobs:
   test:
