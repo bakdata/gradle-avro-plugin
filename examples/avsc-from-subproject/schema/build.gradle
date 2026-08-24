@@ -6,7 +6,7 @@ repositories {
     mavenCentral()
 }
 dependencies {
-    compileOnly "org.apache.avro:avro:1.12.1"
+    compileOnly "org.apache.avro:avro:1.12.2"
 }
 
 sourceSets {

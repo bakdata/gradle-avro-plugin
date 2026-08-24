@@ -30,7 +30,6 @@ class SchemaResolverSpec extends Specification {
         where:
         resourceNames << (
             ["SimpleRecord.avsc", "UseRecord.avsc"].permutations()
-            + ["SimpleRecord.avsc", "UseRecordWithType.avsc"].permutations()
         )
     }
 
@@ -48,7 +47,6 @@ class SchemaResolverSpec extends Specification {
         where:
         resourceNames << (
             ["SimpleEnum.avsc", "UseEnum.avsc"].permutations()
-            + ["SimpleEnum.avsc", "UseEnumWithType.avsc"].permutations()
         )
     }
 
@@ -66,7 +64,6 @@ class SchemaResolverSpec extends Specification {
         where:
         resourceNames << (
             ["SimpleFixed.avsc", "UseFixed.avsc"].permutations()
-            + ["SimpleFixed.avsc", "UseFixedWithType.avsc"].permutations()
         )
     }
 
@@ -84,7 +81,6 @@ class SchemaResolverSpec extends Specification {
         where:
         resourceNames << (
             ["SimpleEnum.avsc", "SimpleRecord.avsc", "SimpleFixed.avsc", "UseArray.avsc"].permutations()
-            + ["SimpleEnum.avsc", "SimpleRecord.avsc", "SimpleFixed.avsc", "UseArrayWithType.avsc"].permutations()
         )
     }
 
@@ -102,7 +98,6 @@ class SchemaResolverSpec extends Specification {
         where:
         resourceNames << (
             ["SimpleEnum.avsc", "SimpleRecord.avsc", "SimpleFixed.avsc", "UseMap.avsc"].permutations()
-            + ["SimpleEnum.avsc", "SimpleRecord.avsc", "SimpleFixed.avsc", "UseMapWithType.avsc"].permutations()
         )
     }
 

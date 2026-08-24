@@ -56,4 +56,4 @@ jobs:
         with:
           java-version: ${{ matrix.java }}
       - shell: bash
-        run: ./gradlew testCompatibility -PavroVersion=1.12.1 -PgradleVersion=${{ matrix.gradle }}
+        run: ./gradlew testCompatibility -PavroVersion=1.12.2 -PgradleVersion=${{ matrix.gradle }}
