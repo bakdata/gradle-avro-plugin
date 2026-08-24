@@ -3,6 +3,6 @@
     "namespace": "resolver",
     "type": "record",
     "fields" : [
-        {"name": "field1", "type": {"type": "SimpleRecord"} }
+        {"name": "field1", "type": "SimpleRecord" }
     ]
 }
