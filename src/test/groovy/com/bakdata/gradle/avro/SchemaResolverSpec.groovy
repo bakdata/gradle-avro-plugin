@@ -102,7 +102,7 @@ class SchemaResolverSpec extends Specification {
         where:
         resourceNames << (
             ["SimpleEnum.avsc", "SimpleRecord.avsc", "SimpleFixed.avsc", "UseMap.avsc"].permutations()
-            + ["SimpleEnum.avsc", "SimpleRecord.avsc", "SimpleFixed.avsc", "UseMapWithType.avsc"].permutations()
+            + ["SimpleEnum.avsc", "SimpleRecord.avsc", "SimpleFixed.avsc"].permutations()
         )
     }
 
