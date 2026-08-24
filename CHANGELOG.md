@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.1](https://github.com/bakdata/gradle-avro-plugin/tree/2.0.1) - 2026-08-24
+### What's changed
+
+* Refactor Java compatibility CI tests into single matrix job by @jkbe in [#6](https://github.com/bakdata/gradle-avro-plugin/pull/6)
+
+* Upgrade to Avro 1.12.2 by @philipp94831 in [#5](https://github.com/bakdata/gradle-avro-plugin/pull/5)
+
+
+### New Contributors
+* @jkbe made their first contribution in [#6](https://github.com/bakdata/gradle-avro-plugin/pull/6)
+
+**Full Changelog**: https://github.com/bakdata/gradle-avro-plugin/compare/2.0.0...2.0.1
+
 ## [2.0.0](https://github.com/bakdata/gradle-avro-plugin/tree/2.0.0) - 2026-03-17
 ### What's changed
 
@@ -1079,6 +1092,7 @@ All notable changes to this project will be documented in this file.
 
 
 ### New Contributors
+* @bakdata-bot made their first contribution
 * @philipp94831 made their first contribution in [#4](https://github.com/bakdata/gradle-avro-plugin/pull/4)
 * @davidmc24 made their first contribution
 * @mavogel made their first contribution
